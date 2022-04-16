@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp">
+      <Filter>ySLAM\include</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{58f6c209-0326-4f09-84df-7452537cd9bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{3ecfb452-b1e8-41ff-9b59-2e54e0a461e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{57160164-6d44-49f1-84f5-317930f3b9f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ySLAM">
+      <UniqueIdentifier>{7cf2ae81-3683-4ac4-9aef-635c5b869eef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ySLAM\include">
+      <UniqueIdentifier>{22b55352-c354-4384-956b-ed4cef0b31c9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h">
+      <Filter>ySLAM\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
