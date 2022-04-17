@@ -1,8 +1,13 @@
 #include "include/YSlam.h"
+#include "datastruct/Image.hpp"
+#include "Tracker/Tracker.h"
 
-namespace YSlam {
 
-	YSlam* instance = nullptr;
+namespace dan {
+
+	static YSlam* instance = nullptr;
+
+	Tracker* tracker = nullptr;
 
 	YSlam::YSlam() {
 	
@@ -28,8 +33,28 @@ namespace YSlam {
 		return;
 	}
 
+	bool YSlam::init(std::string dataPath, std::string parameterPath) {
 
-	bool YSlam::init() {
+		std::cout << parameterPath << std::endl;
+		Parameters::getInstance()->setParameters(parameterPath);
+
+		tracker = Tracker::createTracker(TRACKER_TYPE);
+
 		return true;
+	}
+
+	void YSlam::setNewFrame(Byte* data, int length, int width, int height, datastruct::ColorFormat format, unsigned long long int timestmap) {
+
+		datastruct::ImagePtr image(new datastruct::Image());
+		image->cvImage = cv::Mat(height, width, CV_8UC1);
+
+		image->timestamp = timestmap;
+		memcpy(image->cvImage.data, data, length);
+		image->width = image->cvImage.cols;
+		image->height = image->cvImage.rows;
+		image->length = image->cvImage.cols * image->cvImage.rows;
+
+		tracker->process(image);
+
 	}
 }

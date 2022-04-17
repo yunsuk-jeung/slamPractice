@@ -13,10 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{610ccf9d-4130-4a31-b9d5-cc0d9ff2310d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\FileReader">
+      <UniqueIdentifier>{a5d72238-7bfd-4aa4-9138-2c00050f1f1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window_single_main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Utility\FileReader\FileReader.cpp">
+      <Filter>Utility\FileReader</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\YSlam\Utility\FileReader\FileReader.h">
+      <Filter>Utility\FileReader</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

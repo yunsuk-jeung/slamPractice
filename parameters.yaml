@@ -1,0 +1,11 @@
+%YAML:1.0
+
+DataType: 0
+#0 : EUROC
+#1 : ANDROID
+#2 : IOS
+
+TrackerType: 2
+#0 : OPTICAL FLOW
+#1 : SEMI DENSE
+#2 : DENSE_SPARSE

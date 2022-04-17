@@ -1,11 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp">
-      <Filter>ySLAM\include</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{58f6c209-0326-4f09-84df-7452537cd9bb}</UniqueIdentifier>
     </Filter>
@@ -19,12 +14,59 @@
       <UniqueIdentifier>{7cf2ae81-3683-4ac4-9aef-635c5b869eef}</UniqueIdentifier>
     </Filter>
     <Filter Include="ySLAM\include">
-      <UniqueIdentifier>{22b55352-c354-4384-956b-ed4cef0b31c9}</UniqueIdentifier>
+      <UniqueIdentifier>{659725f0-d2f7-415a-b21b-080ff3157158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ySLAM\datastruct">
+      <UniqueIdentifier>{b07145a9-1a2f-4264-82ae-3ddbcb107970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ySLAM\Parameters">
+      <UniqueIdentifier>{8d59b1be-b372-44f6-ade5-63c90e6758c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ySLAM\Tracker">
+      <UniqueIdentifier>{c360c243-d20b-4cff-8a59-4391f58e1cd8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h">
       <Filter>ySLAM\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\datastruct\Image.hpp">
+      <Filter>ySLAM\datastruct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\datastruct\Frame.h">
+      <Filter>ySLAM\datastruct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\datastruct\ImagePyramid.hpp">
+      <Filter>ySLAM\datastruct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\datastruct\Types.h">
+      <Filter>ySLAM\datastruct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Parameters\Parameters.h">
+      <Filter>ySLAM\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Tracker\Tracker.h">
+      <Filter>ySLAM\Tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Tracker\DSTracker.h">
+      <Filter>ySLAM\Tracker</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp">
+      <Filter>ySLAM\include</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\datastruct\Frame.cpp">
+      <Filter>ySLAM\datastruct</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Parameters\Parameters.cpp">
+      <Filter>ySLAM\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Tracker\Tracker.cpp">
+      <Filter>ySLAM\Tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Tracker\DSTracker.cpp">
+      <Filter>ySLAM\Tracker</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
