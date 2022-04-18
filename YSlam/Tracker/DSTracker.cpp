@@ -9,6 +9,10 @@ namespace dan {
 	void DSTracker::process(datastruct::ImagePtr image) {
 		cv::imshow("test", image->cvImage);
 		cv::waitKey();
+
+
+
+
 	}
 
 }
