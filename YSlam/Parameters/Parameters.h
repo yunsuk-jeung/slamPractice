@@ -33,4 +33,5 @@ public:
 };
 extern DataType DATA_TYPE;
 extern TrackerType TRACKER_TYPE;
+extern int PYRAMID_LEVEL;
 }

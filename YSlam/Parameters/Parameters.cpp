@@ -9,6 +9,8 @@ TrackerType TRACKER_TYPE = TrackerType::OPTICAL_FLOW;
 
 DataType DATA_TYPE = DataType::EUROC;
 
+int PYRAMID_LEVEL = 0;
+
 Parameters::Parameters() {}
 
 Parameters::~Parameters() {}
@@ -47,8 +49,13 @@ bool Parameters::setParameters(std::string parameterPath) {
 	val = (int)tracker;
 	TRACKER_TYPE = static_cast<TrackerType>(val);
 
+	cv::FileNode pyramidLevel(fsSettings["PyramidLevel"]);
+	PYRAMID_LEVEL = (int)pyramidLevel;
+	
+
 	std::cout << (int)DATA_TYPE << std::endl;
 	std::cout << (int)TRACKER_TYPE << std::endl;
+	std::cout << PYRAMID_LEVEL << std::endl;
 	return true;
 }
 

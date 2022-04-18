@@ -9,3 +9,5 @@ TrackerType: 2
 #0 : OPTICAL FLOW
 #1 : SEMI DENSE
 #2 : DENSE_SPARSE
+
+PyramidLevel: 4

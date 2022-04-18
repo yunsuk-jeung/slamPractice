@@ -9,16 +9,21 @@ namespace datastruct {
 class ImagePyramid {
 
 public:
-	long long int timestamp;
 
-	std::vector<cv::Mat> iamges;
+	ImagePyramid() {}
+	~ImagePyramid() {}
+
+	long long int timestamp;
+	int level = 0;
+
+	std::vector<cv::Mat> images;
 
 
 private:
 
 };
 
-typedef std::shared_ptr<ImagePyramid> ImagePtr;
+typedef std::shared_ptr<ImagePyramid> ImagePyramidPtr;
 
 }
 }
