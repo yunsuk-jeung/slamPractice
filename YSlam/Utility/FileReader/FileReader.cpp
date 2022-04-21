@@ -37,8 +37,8 @@ void FileReader::openDirectory(std::string dataPath) {
 		int pos = line.find(",");
 		string data = line.substr(0, pos);
 		line = line.substr(pos + 1, line.length() - pos);
-		timestamp = stoull(data);
-
+		timestamp = std::stoull(data);
+		//std::cout << timestamp << std::endl;
 
 		string imageName;
 
@@ -56,7 +56,7 @@ void FileReader::openDirectory(std::string dataPath) {
 		//imageNames.push(make_pair(timestamp, imageName));
 		//imageQueue.push(image);
 		//std::cout << "reading Image" << std::endl;
-	}
+	}	//std::cout << std::endl;
 }
 
 FileReader::~FileReader() {

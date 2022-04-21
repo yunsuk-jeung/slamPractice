@@ -23,8 +23,6 @@ void mainFunc() {
 		break;
 	}
 
-
-
 	dan::YSlam::getInstance()->deleteInstance();
 }
 
