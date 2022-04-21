@@ -25,6 +25,9 @@
     <Filter Include="ySLAM\Tracker">
       <UniqueIdentifier>{c360c243-d20b-4cff-8a59-4391f58e1cd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ySLAM\Extractor">
+      <UniqueIdentifier>{301be0e2-d23a-47ca-b972-cfcdd9fdb143}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h">
@@ -51,6 +54,12 @@
     <ClInclude Include="..\..\..\..\YSlam\Tracker\DSTracker.h">
       <Filter>ySLAM\Tracker</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Extractor\Extractor.h">
+      <Filter>ySLAM\Extractor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.h">
+      <Filter>ySLAM\Extractor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp">
@@ -67,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\YSlam\Tracker\DSTracker.cpp">
       <Filter>ySLAM\Tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Extractor\Extractor.cpp">
+      <Filter>ySLAM\Extractor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.cpp">
+      <Filter>ySLAM\Extractor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

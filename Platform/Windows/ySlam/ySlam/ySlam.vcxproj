@@ -23,6 +23,8 @@
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Image.hpp" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\ImagePyramid.hpp" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Types.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Extractor\Extractor.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.h" />
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h" />
     <ClInclude Include="..\..\..\..\YSlam\Parameters\Parameters.h" />
     <ClInclude Include="..\..\..\..\YSlam\Tracker\DSTracker.h" />
@@ -30,6 +32,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\YSlam\datastruct\Frame.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Extractor\Extractor.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Parameters\Parameters.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Tracker\DSTracker.cpp" />

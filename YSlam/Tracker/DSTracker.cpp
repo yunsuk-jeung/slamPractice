@@ -1,12 +1,23 @@
+#include <opencv2/opencv.hpp>
+
 #include "Tracker/DSTracker.h"
 #include "datastruct/Frame.h"
-#include <opencv2/opencv.hpp>
+
+#include "Extractor/Extractor.h"
+#include "Extractor/GridPixelExtractor.h"
+
+#include "Parameters/Parameters.h"
 
 namespace dan {
 	DSTracker::DSTracker() {
 		std::cout << "Tracker is DSTracker" << std::endl;
+
+		extractor = Extractor::createExtractor(TRACKER_TYPE);
+
 	}
-	DSTracker::~DSTracker() {}
+	DSTracker::~DSTracker() {
+		delete extractor;
+	}
 
 	void DSTracker::process(datastruct::ImagePtr image) {
 		
@@ -17,6 +28,8 @@ namespace dan {
 		Frame frame;
 		frame.createImagePyramid(image);
 
+
+	
 
 
 

@@ -4,8 +4,7 @@
 
 namespace dan {
 
-	enum class TrackerType;
-
+	enum class TrackerType; 
 	class Tracker {
 	public:
 		Tracker();

@@ -10,7 +10,7 @@ namespace dan {
 		switch (trackerType) {
 
 		case TrackerType::DENSE_SPARSE:
-			return new DSTracker();;
+			return new DSTracker();
 			
 		}
 

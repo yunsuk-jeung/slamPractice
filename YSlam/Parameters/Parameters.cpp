@@ -41,6 +41,7 @@ bool Parameters::setParameters(std::string parameterPath) {
 
 	int val = 0;;
 	cv::FileNode data(fsSettings["DataType"]);
+
 	val = (int)data;
 	DATA_TYPE = static_cast<DataType>(val);
 
@@ -53,9 +54,9 @@ bool Parameters::setParameters(std::string parameterPath) {
 	PYRAMID_LEVEL = (int)pyramidLevel;
 	
 
-	std::cout << (int)DATA_TYPE << std::endl;
-	std::cout << (int)TRACKER_TYPE << std::endl;
-	std::cout << PYRAMID_LEVEL << std::endl;
+	std::cout << "TrackerType : " << (int)DATA_TYPE << std::endl;
+	std::cout << "TrackerType : " << (int)TRACKER_TYPE << std::endl;
+	std::cout << "PyramidLevel : "<< PYRAMID_LEVEL << std::endl;
 	return true;
 }
 
