@@ -28,6 +28,9 @@
     <Filter Include="ySLAM\Extractor">
       <UniqueIdentifier>{301be0e2-d23a-47ca-b972-cfcdd9fdb143}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ySLAM\Utils">
+      <UniqueIdentifier>{23ca0d1b-a001-4cec-ac14-434a8436abf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h">
@@ -60,6 +63,9 @@
     <ClInclude Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.h">
       <Filter>ySLAM\Extractor</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Utils\Patch.hpp">
+      <Filter>ySLAM\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp">
@@ -82,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.cpp">
       <Filter>ySLAM\Extractor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Utils\Patch.cpp">
+      <Filter>ySLAM\Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

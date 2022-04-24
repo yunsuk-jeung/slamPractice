@@ -29,6 +29,7 @@
     <ClInclude Include="..\..\..\..\YSlam\Parameters\Parameters.h" />
     <ClInclude Include="..\..\..\..\YSlam\Tracker\DSTracker.h" />
     <ClInclude Include="..\..\..\..\YSlam\Tracker\Tracker.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Utils\Patch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\YSlam\datastruct\Frame.cpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="..\..\..\..\YSlam\Parameters\Parameters.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Tracker\DSTracker.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Tracker\Tracker.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Utils\Patch.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

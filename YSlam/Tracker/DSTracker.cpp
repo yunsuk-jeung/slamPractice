@@ -13,6 +13,7 @@ namespace dan {
 		std::cout << "Tracker is DSTracker" << std::endl;
 
 		extractor = Extractor::createExtractor(TRACKER_TYPE);
+		extractor->setImageInfo(752, 480);
 
 	}
 	DSTracker::~DSTracker() {
@@ -21,13 +22,15 @@ namespace dan {
 
 	void DSTracker::process(datastruct::ImagePtr image) {
 		
-		cv::imshow("test", image->cvImage);
-		cv::waitKey(1);
+		//cv::imshow("test", image->cvImage);
+		//cv::waitKey(1);
 
+		//will be deleted in map
+		Frame* frame = new Frame();
+		frame->createImagePyramid(image);
+		frame->createGradientPyramid();
 
-		Frame frame;
-		frame.createImagePyramid(image);
-		frame.createGradientPyramid();
+		extractor->extract(frame);
 
 
 	

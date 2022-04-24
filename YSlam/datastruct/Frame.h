@@ -14,6 +14,11 @@ namespace dan {
 
 		void createImagePyramid(datastruct::ImagePtr _imagePyramid);
 		void createGradientPyramid();
+		int getPyramidLevel();
+		datastruct::ImagePyramid* getImagePyramid();
+		datastruct::ImagePyramid* getXGradPyramid();
+		datastruct::ImagePyramid* getYGradPyramid();
+
 
 	private:
 		datastruct::ImagePyramid imagePyramid;

@@ -6,6 +6,9 @@
 
 #include "Utility/FileReader/FileReader.h"
 
+#include "Eigen/Eigen"
+#include "Eigen/Dense"
+#include "Eigen/Core"
 
 std::string dataPath = "D:/dataset/EUROC/MH_01_easy/mav0/cam0/";
 std::string parameterPath = "../../../../parameters.yaml";
@@ -28,6 +31,7 @@ void mainFunc() {
 
 
 int main() {
+
 
 	if (dan::YSlam::getInstance()->init(dataPath, parameterPath)) {
 		std::cout << "YSlam init success" << std::endl;

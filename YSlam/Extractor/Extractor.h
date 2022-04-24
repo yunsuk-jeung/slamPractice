@@ -15,9 +15,17 @@ namespace dan {
 
 		static Extractor* createExtractor(TrackerType trackerType);
 
+		void setImageInfo(int width, int height);
+
 		virtual void extract(Frame* frame) = 0;
 
-	private:
+		int _width;
+		int _height;
+
+		int _xStep = 0;
+		int _yStep = 0;
+
+	protected:
 
 	};
 

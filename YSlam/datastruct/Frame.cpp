@@ -14,26 +14,19 @@ namespace dan{
 		cv::Mat image;
 		image = imagePtr->cvImage.clone();
 
-		imagePyramid.images.push_back(image);
+		//imagePyramid.images.push_back(image);
 
 		for (int i = 0; i < PYRAMID_LEVEL; i++) {
-			cv::pyrDown(image, image);
 			imagePyramid.images.push_back(image);
-
-		
+			cv::pyrDown(image, image);
 		}
 
-		for (int i = 0; i < PYRAMID_LEVEL; i++) {
-			cv::Mat test;
-			test = imagePyramid.images[i];
-			cv::imshow("test", test);
-			cv::waitKey();
-		}
-
-		/*for (int i = 0; i < PYRAMID_LEVEL; i++) {
-			cv::imshow( " " + std::to_string(i), imagePyramid.images[PYRAMID_LEVEL - i]);
-			cv::waitKey();
-		}*/
+		//for (int i = 0; i < PYRAMID_LEVEL; i++) {
+		//	cv::Mat test;
+		//	test = imagePyramid.images[i];
+		//	cv::imshow("test" + std::to_string(i) , test);
+		//	cv::waitKey(-1);
+		//}
 
 	}
 
@@ -56,8 +49,6 @@ namespace dan{
 
 			cv::Mat floatImage;
 			imagePyramid.images[i].convertTo(floatImage, CV_32FC1);
-			cv::imshow("float", floatImage);
-
 
 			cv::filter2D(floatImage, xgrad, -1, xKernal);
 			cv::filter2D(floatImage, ygrad, -1, yKernal);
@@ -68,16 +59,32 @@ namespace dan{
 
 		}
 
-		for (int i = 0; i < PYRAMID_LEVEL; i++) {
-			cv::Mat xgrad = xGradientPyramid.images[i];
-			cv::Mat ygrad = yGradientPyramid.images[i];
+		//for (int i = 0; i < PYRAMID_LEVEL; i++) {
+		//	cv::Mat xgrad = xGradientPyramid.images[i];
+		//	cv::Mat ygrad = yGradientPyramid.images[i];
 
-			cv::hconcat(xgrad, ygrad, xgrad);
+		//	cv::hconcat(xgrad, ygrad, xgrad);
 
-			cv::imshow("grad " + std::to_string(i), xgrad);
-			cv::waitKey();
-		}
+		//	cv::imshow("grad " + std::to_string(i), xgrad/255.0);
+		//	cv::waitKey();
+		//}
 
+	}
+
+	int Frame::getPyramidLevel() {
+		return imagePyramid.level;
+	}
+
+	datastruct::ImagePyramid* Frame::getImagePyramid() {
+		return &imagePyramid;
+	}
+
+	datastruct::ImagePyramid* Frame::getXGradPyramid() {
+		return &xGradientPyramid;
+	}
+
+	datastruct::ImagePyramid* Frame::getYGradPyramid() {
+		return &yGradientPyramid;
 	}
 
 }
