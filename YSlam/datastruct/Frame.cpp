@@ -14,6 +14,10 @@ namespace dan{
 		cv::Mat image;
 		image = imagePtr->cvImage.clone();
 
+		if (DATA_TYPE == DataType::EUROC) {
+			image = image(cv::Rect(8, 0, 736, 480)); 
+		}
+
 		//imagePyramid.images.push_back(image);
 
 		for (int i = 0; i < PYRAMID_LEVEL; i++) {

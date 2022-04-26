@@ -13,7 +13,8 @@ namespace dan {
 		std::cout << "Tracker is DSTracker" << std::endl;
 
 		extractor = Extractor::createExtractor(TRACKER_TYPE);
-		extractor->setImageInfo(752, 480);
+		//todo get data from config
+		extractor->setImageInfo(736, 480);
 
 	}
 	DSTracker::~DSTracker() {

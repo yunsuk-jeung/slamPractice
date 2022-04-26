@@ -21,21 +21,25 @@ namespace dan {
 		float* xgrad = (float*)frame->getXGradPyramid()->images[0].data;
 		float* ygrad = (float*)frame->getYGradPyramid()->images[0].data;
 
-		for (int i = 0; i < _width; i++) {
-			for (int j = 0; j < _height; j++) {
+		for (int i = 0; i < _height; i++) {
+			for (int j = 0; j < _width; j++) {
 				
+				int u = i >> 5;
+				int v = j >> 5;
 			
-				float dx = xgrad[i * _width + j];
-				float dy = ygrad[i * _width + j];
+				float dx = xgrad[i * _height + j];
+				float dy = ygrad[i * _height + j];
 
-				float sum = dx * dx + dy * dy;
+				int sum = sqrt(dx * dx + dy * dy) - 1 ;
 
-				if (sum / 2500 > 1) {
-					//bin[ i / _xStep * 32 * 50 + j / _yStep * 50 + 49] += 1;
+				if (sum < 0) {
+					sum = 0;
 				}
-				else {
-					//bin[ i / _xStep * 32 * 50 + j / _yStep * 50 + (int)sum - 1];
+				else if (sum > 48 ){
+					sum = 48;
 				}
+
+
 
 			}
 		}
