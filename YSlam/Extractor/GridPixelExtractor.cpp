@@ -185,7 +185,9 @@ void GridPixelExtractor::process(Frame* frame) {
 
 					if (u > _width)
 						break;
-
+					if (count > 1) {
+						break;
+					}
 					// ±×³É 20 ¹Ú¾Æ³öµµ ±×·²µíÇÔ...?
 					//if (mag[start + row2 + w] > 40) {
 					if (mag[start + row2 + w] > histThreshold[u / _xStep + v / _yStep]) {
@@ -195,7 +197,6 @@ void GridPixelExtractor::process(Frame* frame) {
 						temp.y = v;
 						uvs.push_back(temp);
 						count++;
-						break;
 
 					}
 				}
