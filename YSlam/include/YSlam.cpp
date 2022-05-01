@@ -48,8 +48,15 @@ namespace dan {
 		datastruct::ImagePtr image(new datastruct::Image());
 		image->cvImage = cv::Mat(height, width, CV_8UC1);
 
+
+
 		image->timestamp = timestmap;
 		memcpy(image->cvImage.data, data, length);
+
+		if (DATA_TYPE == DataType::EUROC) {
+			image->cvImage = image->cvImage(cv::Rect(8, 0, 736, 480));
+		}
+
 		image->width = image->cvImage.cols;
 		image->height = image->cvImage.rows;
 		image->length = image->cvImage.cols * image->cvImage.rows;

@@ -13,6 +13,7 @@ DSTracker::DSTracker() {
 	std::cout << "Tracker is DSTracker" << std::endl;
 
 	extractor = Extractor::createExtractor(TRACKER_TYPE);
+	
 
 }
 DSTracker::~DSTracker() {
@@ -30,7 +31,7 @@ void DSTracker::process(datastruct::ImagePtr image) {
 	frame->createGradientPyramid();
 	frame->createMagGradientPyramid();
 
-	extractor->extract(frame);
+	extractor->process(frame);
 
 
 

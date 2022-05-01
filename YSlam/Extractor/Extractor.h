@@ -16,7 +16,8 @@ namespace dan {
 
 		void setConfig();
 
-		virtual void extract(Frame* frame) = 0;
+		virtual void allocate() = 0;
+		virtual void process(Frame* frame) = 0;
 
 	protected:
 		Extractor();

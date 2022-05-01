@@ -62,6 +62,7 @@ bool FileReader::getImage(std::shared_ptr<datastruct::Image> image) {
 
 	image->timestamp = imageInfo.first;
 	image->cvImage  = cv::imread(imageInfo.second, cv::IMREAD_GRAYSCALE);
+
 	image->width  = image->cvImage.cols;
 	image->height = image->cvImage.rows;
 	image->length  = image->cvImage.cols * image->cvImage.rows;

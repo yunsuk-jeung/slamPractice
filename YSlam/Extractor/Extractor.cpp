@@ -10,7 +10,10 @@ namespace dan {
 		switch (trackerType) {
 
 		case TrackerType::DENSE_SPARSE:
-			return new GirdPixelExtractor();;
+			auto out = GridPixelExtractor::createGridPixelExtractor();
+			out->setConfig();
+			out->allocate();
+			return out;
 		}
 		return nullptr;
 	}
