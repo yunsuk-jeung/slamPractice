@@ -138,25 +138,26 @@ void GridPixelExtractor::process(Frame* frame) {
 	int yPixelNum = _yStep >> 1;
 */
 
-	int xRegion = (_width + 11) / 12;
-	int yRegion = (_height + 11) / 12;
+	int xRegion = (_width + 11) / 20;
+	int yRegion = (_height + 11) / 20;
 
-	int xPixelNum =  12;
-	int yPixelNum =  12;
+	int xPixelNum = 20;
+	int yPixelNum = 20;
 
 	std::vector<cv::Point2f> uvs;
 
 	for (int i = 0; i < yRegion; i++) {
 		for (int j = 0; j < xRegion; j++) {
-			
+
 			int row = yPixelNum * i;
 			int col = xPixelNum * j;
 
 			int start = row * _width + col;
 
+			int count = 0;
 
 			for (int k = 0; k < yPixelNum; k++) {
-				
+
 
 				int row2 = k * _width;
 				int v = row + k;
@@ -171,11 +172,17 @@ void GridPixelExtractor::process(Frame* frame) {
 					if (u > _width)
 						break;
 
-					if (mag[start + row2+ w] > 20) {
+					// ±×³É 20 ¹Ú¾Æ³öµµ ±×·²µíÇÔ...?
+					//if (mag[start + row2 + w] > 20) {
+					if (mag[start + row2 + w] > histThreshold[u / _xStep + v/_yStep]) {
+						if (count > 1) {
+							continue;
+						}
 						cv::Point2f temp;
 						temp.x = u;
 						temp.y = v;
 						uvs.push_back(temp);
+						count++;
 					}
 				}
 
