@@ -35,7 +35,7 @@ namespace dan {
 
 	bool YSlam::init(std::string dataPath, std::string parameterPath) {
 
-		std::cout << parameterPath << std::endl;
+		std::cout << "parameter Path : " <<  parameterPath << std::endl;
 		Parameters::getInstance()->setParameters(parameterPath);
 
 		tracker = Tracker::createTracker(TRACKER_TYPE);

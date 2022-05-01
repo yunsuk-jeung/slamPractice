@@ -3,6 +3,7 @@
 #include <iostream>
 #include "datastruct/Image.hpp"
 #include "datastruct/ImagePyramid.hpp"
+#include "Parameters/Parameters.h"
 
 namespace dan {
 
