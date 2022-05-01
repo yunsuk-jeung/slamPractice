@@ -9,35 +9,35 @@
 #include "Parameters/Parameters.h"
 
 namespace dan {
-	DSTracker::DSTracker() {
-		std::cout << "Tracker is DSTracker" << std::endl;
+DSTracker::DSTracker() {
+	std::cout << "Tracker is DSTracker" << std::endl;
 
-		extractor = Extractor::createExtractor(TRACKER_TYPE);
-		extractor->setImageInfo(752, 480);
+	extractor = Extractor::createExtractor(TRACKER_TYPE);
 
-	}
-	DSTracker::~DSTracker() {
-		delete extractor;
-	}
+}
+DSTracker::~DSTracker() {
+	delete extractor;
+}
 
-	void DSTracker::process(datastruct::ImagePtr image) {
-		
-		//cv::imshow("test", image->cvImage);
-		//cv::waitKey(1);
+void DSTracker::process(datastruct::ImagePtr image) {
 
-		//will be deleted in map
-		Frame* frame = new Frame();
-		frame->createImagePyramid(image);
-		frame->createGradientPyramid();
+	//cv::imshow("test", image->cvImage);
+	//cv::waitKey(1);
 
-		extractor->extract(frame);
+	//will be deleted in map
+	Frame* frame = new Frame();
+	frame->createImagePyramid(image);
+	frame->createGradientPyramid();
+	frame->createMagGradientPyramid();
 
-
-	
+	extractor->extract(frame);
 
 
 
 
-	}
+
+
+
+}
 
 }

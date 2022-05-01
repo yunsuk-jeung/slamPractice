@@ -10,22 +10,30 @@ namespace dan {
 	class Extractor{
 	public:
 
-		Extractor();
 		virtual ~Extractor();
 
 		static Extractor* createExtractor(TrackerType trackerType);
 
-		void setImageInfo(int width, int height);
+		void setConfig();
 
 		virtual void extract(Frame* frame) = 0;
 
+	protected:
+		Extractor();
+		
+		//image width, height
 		int _width;
 		int _height;
 
+		// grid Num
+		int _xGridNum = 0;
+		int _yGridNum = 0;
+
+		// grid Step
 		int _xStep = 0;
 		int _yStep = 0;
 
-	protected:
+	private:
 
 	};
 

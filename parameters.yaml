@@ -11,3 +11,14 @@ TrackerType: 2
 #2 : DENSE_SPARSE
 
 PyramidLevel: 3
+
+xGridNum: 5 # 2^5
+yGridNum: 5 # 2^5
+
+
+
+#Debug Obtion
+Debug: 1
+show_threshold: 1
+
+

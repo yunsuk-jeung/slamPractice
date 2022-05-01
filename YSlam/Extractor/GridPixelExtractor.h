@@ -1,6 +1,7 @@
 #pragma once 
 
 #include <iostream>
+#include <vector>
 #include "Extractor/Extractor.h"
 
 namespace dan {
@@ -13,9 +14,15 @@ namespace dan {
 		virtual ~GirdPixelExtractor();
 		virtual void extract(Frame* frame);
 
-	private:
-		int* bin = nullptr;
 
+	protected:
+
+	private:
+
+		//std::vector< std::vector <int> > histBins;
+		std::vector<std::vector<int>> histBins;
+		std::vector<int> histThreshold;
+		
 	};
 
 }

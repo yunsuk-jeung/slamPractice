@@ -1,90 +1,120 @@
 #include "datastruct/Frame.h"
 #include "Parameters/Parameters.h"
 
-namespace dan{
-	Frame::Frame() {}
-	Frame::~Frame() {}
+namespace dan {
+Frame::Frame() {}
+Frame::~Frame() {}
 
-	void Frame::createImagePyramid(datastruct::ImagePtr imagePtr) {
-		
-		imagePyramid.timestamp = imagePtr->timestamp;
-		imagePyramid.level = PYRAMID_LEVEL;
-		//imagePyramid.images.reserve(PYRAMID_LEVEL);
+void Frame::createImagePyramid(datastruct::ImagePtr imagePtr) {
 
-		cv::Mat image;
-		image = imagePtr->cvImage.clone();
+	imagePyramid.timestamp = imagePtr->timestamp;
+	imagePyramid.level = PYRAMID_LEVEL;
+	//imagePyramid.images.reserve(PYRAMID_LEVEL);
 
-		//imagePyramid.images.push_back(image);
+	imagePyramid.images.reserve(PYRAMID_LEVEL);
 
-		for (int i = 0; i < PYRAMID_LEVEL; i++) {
-			imagePyramid.images.push_back(image);
-			cv::pyrDown(image, image);
+	cv::Mat image;
+	image = imagePtr->cvImage.clone();
+
+	//imagePyramid.images.push_back(image);
+
+	for (int i = 0; i < PYRAMID_LEVEL; i++) {
+		imagePyramid.images.push_back(image);
+		cv::pyrDown(image, image);
+	}
+
+	//for (int i = 0; i < PYRAMID_LEVEL; i++) {
+	//	cv::Mat test;
+	//	test = imagePyramid.images[i];
+	//	cv::imshow("test" + std::to_string(i) , test);
+	//	cv::waitKey(-1);
+	//}
+
+}
+
+void Frame::createGradientPyramid() {
+	float kernal[] = { -0.5f, 0.0f, 0.5f };
+
+	cv::Mat xKernal(1, 3, CV_32FC1, kernal);
+	cv::Mat yKernal(3, 1, CV_32FC1, kernal);
+
+	xGradientPyramid.timestamp = imagePyramid.timestamp;
+	xGradientPyramid.level = PYRAMID_LEVEL;
+	xGradientPyramid.images.reserve(PYRAMID_LEVEL);
+
+	yGradientPyramid.timestamp = imagePyramid.timestamp;
+	yGradientPyramid.level = PYRAMID_LEVEL;
+	yGradientPyramid.images.reserve(PYRAMID_LEVEL);
+
+
+	for (int i = 0; i < PYRAMID_LEVEL; i++) {
+		cv::Mat xgrad = cv::Mat(imagePyramid.images[i].size(), CV_32FC1);
+		cv::Mat ygrad = cv::Mat(imagePyramid.images[i].size(), CV_32FC1);;
+
+		cv::Mat floatImage;
+
+		imagePyramid.images[i].convertTo(floatImage, CV_32FC1);
+
+		cv::filter2D(floatImage, xgrad, -1, xKernal);
+		cv::filter2D(floatImage, ygrad, -1, yKernal);
+
+		xGradientPyramid.images.push_back(xgrad);
+		yGradientPyramid.images.push_back(ygrad);
+	}
+
+	//for (int i = 0; i < PYRAMID_LEVEL; i++) {
+	//	cv::Mat xgrad = xGradientPyramid.images[i];
+	//	cv::Mat ygrad = yGradientPyramid.images[i];
+	//	cv::Mat display;
+	//	cv::hconcat(xgrad, ygrad, display);
+	//	cv::imshow("grad " + std::to_string(i), display /255.0);
+	//	cv::waitKey();
+	//}
+
+}
+
+void Frame::createMagGradientPyramid() {
+	magGradientPyramid.level = imagePyramid.level;
+	magGradientPyramid.level = imagePyramid.timestamp;
+	magGradientPyramid.images.reserve(PYRAMID_LEVEL);
+
+	int pyrlvl = imagePyramid.level;
+
+
+	for (int i = 0; i < pyrlvl; i++) {
+		float* dIdx = (float*)(xGradientPyramid.images[i].data);
+		float* dIdy = (float*)(yGradientPyramid.images[i].data);
+
+		cv::Mat magImage = cv::Mat(imagePyramid.images[i].size(), CV_32FC1);
+		float* mag = (float*)magImage.data;
+
+		int length = xGradientPyramid.images[i].cols * xGradientPyramid.images[i].rows;
+		for (int j = 0; j < length; j++) {
+			mag[j] = sqrt(dIdx[j] * dIdx[j] + dIdy[j] * dIdy[j]);
 		}
 
-		//for (int i = 0; i < PYRAMID_LEVEL; i++) {
-		//	cv::Mat test;
-		//	test = imagePyramid.images[i];
-		//	cv::imshow("test" + std::to_string(i) , test);
-		//	cv::waitKey(-1);
-		//}
-
+		magGradientPyramid.images.push_back(magImage);
 	}
+}
 
-	void Frame::createGradientPyramid() {
-		float kernal[] = { -0.5f, 0.0f, 0.5f };
+int Frame::getPyramidLevel() {
+	return imagePyramid.level;
+}
 
-		cv::Mat xKernal(1, 3, CV_32FC1, kernal);
-		cv::Mat yKernal(3, 1, CV_32FC1, kernal);
+datastruct::ImagePyramid* Frame::getImagePyramid() {
+	return &imagePyramid;
+}
 
-		xGradientPyramid.timestamp = imagePyramid.timestamp;
-		xGradientPyramid.level = PYRAMID_LEVEL;
+datastruct::ImagePyramid* Frame::getXGradPyramid() {
+	return &xGradientPyramid;
+}
 
-		yGradientPyramid.timestamp = imagePyramid.timestamp;
-		yGradientPyramid.level = PYRAMID_LEVEL;
+datastruct::ImagePyramid* Frame::getYGradPyramid() {
+	return &yGradientPyramid;
+}
 
-
-		for (int i = 0; i <  PYRAMID_LEVEL; i++) {
-			cv::Mat xgrad = cv::Mat(imagePyramid.images[i].size(), CV_32FC1);
-			cv::Mat ygrad = cv::Mat(imagePyramid.images[i].size(), CV_32FC1);;
-
-			cv::Mat floatImage;
-			imagePyramid.images[i].convertTo(floatImage, CV_32FC1);
-
-			cv::filter2D(floatImage, xgrad, -1, xKernal);
-			cv::filter2D(floatImage, ygrad, -1, yKernal);
-
-
- 			xGradientPyramid.images.push_back(xgrad);
-			yGradientPyramid.images.push_back(ygrad);
-
-		}
-
-		//for (int i = 0; i < PYRAMID_LEVEL; i++) {
-		//	cv::Mat xgrad = xGradientPyramid.images[i];
-		//	cv::Mat ygrad = yGradientPyramid.images[i];
-
-		//	cv::hconcat(xgrad, ygrad, xgrad);
-
-		//	cv::imshow("grad " + std::to_string(i), xgrad/255.0);
-		//	cv::waitKey();
-		//}
-
-	}
-
-	int Frame::getPyramidLevel() {
-		return imagePyramid.level;
-	}
-
-	datastruct::ImagePyramid* Frame::getImagePyramid() {
-		return &imagePyramid;
-	}
-
-	datastruct::ImagePyramid* Frame::getXGradPyramid() {
-		return &xGradientPyramid;
-	}
-
-	datastruct::ImagePyramid* Frame::getYGradPyramid() {
-		return &yGradientPyramid;
-	}
+datastruct::ImagePyramid* Frame::getMagGradientPyramid() {
+	return &magGradientPyramid;
+}
 
 }

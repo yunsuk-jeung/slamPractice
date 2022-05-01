@@ -10,21 +10,21 @@ namespace dan {
 		switch (trackerType) {
 
 		case TrackerType::DENSE_SPARSE:
-			return new GirdPixelExtractor();
+			return new GirdPixelExtractor();;
 		}
 		return nullptr;
 	}
 
+	void Extractor::setConfig() {
+		_width = 736;
+		_height = 480;
 
-	//todo 나중에 image config 에서 받아오게하기
-	void Extractor::setImageInfo(int width, int height) {
-		_width = width;
-		_height = height;
+		_xGridNum = 1 <<  X_GRID_NUM;
+		_yGridNum = 1 <<  Y_GRID_NUM;
 
-		_xStep = (_width + 31 ) >> 5;
-		_yStep = (_height + 31) >> 5;
+		_xStep = _width >> X_GRID_NUM;
+		_yStep = _height >> X_GRID_NUM;
 
-		std::cout << _xStep << " " << _yStep << std::endl;;
 	}
 
 }

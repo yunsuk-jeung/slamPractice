@@ -20,10 +20,28 @@ void mainFunc() {
 
 	dan::datastruct::ImagePtr image(new dan::datastruct::Image());
 
+	int interval = 0;
+
 	while ( fileReader.getImage(image) ) {
+		
+
+		if (interval != 2) {
+			interval++;
+			continue;
+		}
+		interval = 0;
+
+		cv::imshow("original", image->cvImage);
 
 		dan::YSlam::getInstance()->setNewFrame(image->cvImage.data, image->length, image->width, image->height, dan::datastruct::ColorFormat::GRAY8, image->timestamp);
-		break;
+
+
+
+		int key = cv::waitKey();
+
+		if (key == 27) {
+			break;
+		}
 	}
 
 	dan::YSlam::getInstance()->deleteInstance();
