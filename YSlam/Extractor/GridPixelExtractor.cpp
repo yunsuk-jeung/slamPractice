@@ -5,6 +5,8 @@
 
 #include "Parameters/Parameters.h"
 
+#include "Utils/Timer.h"
+
 
 namespace dan {
 GridPixelExtractor::GridPixelExtractor() {
@@ -46,6 +48,7 @@ void GridPixelExtractor::makeHistogram(float* mag) {
 
 		}
 	}*/
+
 
 	for (int i = 0; i < _yGridNum; i++) {
 		for (int j = 0; j < _xGridNum; j++) {
@@ -97,7 +100,12 @@ void GridPixelExtractor::process(Frame* frame) {
 	float* ygrad = (float*)(frame->getYGradPyramid()->images[0].data);
 	float* mag = (float*)(frame->getMagGradientPyramid()->images[0].data);
 
+	Statistics::startTimer(HISTOGRAM);
+
 	makeHistogram(mag);
+
+	Statistics::stopTimer(HISTOGRAM);
+
 
 	if (SHOW_THRESHOLD_IMAGE == 1) {
 		{
@@ -138,16 +146,17 @@ void GridPixelExtractor::process(Frame* frame) {
 	int yPixelNum = _yStep >> 1;
 */
 
-	int xPixelNum = 20;
-	int yPixelNum = 20;
+	int xPixelNum = 10;
+	int yPixelNum = 10;
 
-	int xRegion = (_width  + xPixelNum - 1) / xPixelNum;
+	int xRegion = (_width + xPixelNum - 1) / xPixelNum;
 	int yRegion = (_height + yPixelNum - 1) / yPixelNum;
 
 
 
-	std::vector<cv::Point2f> uvs;
+	Statistics::startTimer(EXTRACTION);
 
+	std::vector<cv::Point2f> uvs;
 	for (int i = 0; i < yRegion; i++) {
 		for (int j = 0; j < xRegion; j++) {
 
@@ -167,6 +176,9 @@ void GridPixelExtractor::process(Frame* frame) {
 				if (v > _height) {
 					break;
 				}
+				if (count > 1) {
+					break;
+				}
 
 				for (int w = 0; w < xPixelNum; w++) {
 					int u = col + w;
@@ -175,17 +187,16 @@ void GridPixelExtractor::process(Frame* frame) {
 						break;
 
 					// ±×³É 20 ¹Ú¾Æ³öµµ ±×·²µíÇÔ...?
-					//if (mag[start + row2 + w] > 20) {
+					//if (mag[start + row2 + w] > 40) {
 					if (mag[start + row2 + w] > histThreshold[u / _xStep + v / _yStep]) {
-						if (count > 0) {
-							continue;
-						}
+						
 						cv::Point2f temp;
 						temp.x = u;
 						temp.y = v;
 						uvs.push_back(temp);
 						count++;
 						break;
+
 					}
 				}
 
@@ -194,15 +205,26 @@ void GridPixelExtractor::process(Frame* frame) {
 		}
 	}
 
-	cv::Mat debug;
-	debug = frame->getImagePyramid()->images[0].clone();
-	cv::cvtColor(debug, debug, cv::COLOR_GRAY2BGR);
-	for (int i = 0; i < uvs.size(); i++) {
-		cv::circle(debug, uvs[i], 2, cv::Scalar(0, 0, 255), -1);
-	}
 
-	cv::imshow("debug", debug);
-	cv::waitKey(1);
+	Statistics::stopTimer(EXTRACTION);
+
+	std::vector<TIME_PERIOD> statisticArray;
+	statisticArray.push_back(HISTOGRAM);
+	statisticArray.push_back(EXTRACTION);
+
+	Statistics::report(statisticArray);
+
+	if (SHOW_FEATURE == 1) {
+		cv::Mat debug;
+		debug = frame->getImagePyramid()->images[0].clone();
+		cv::cvtColor(debug, debug, cv::COLOR_GRAY2BGR);
+		for (int i = 0; i < uvs.size(); i++) {
+			cv::circle(debug, uvs[i], 2, cv::Scalar(0, 0, 255), -1);
+		}
+
+		cv::imshow("debug", debug);
+		cv::waitKey(1);
+	}
 
 
 

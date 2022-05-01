@@ -39,5 +39,5 @@ extern int Y_GRID_NUM;
 
 /* Debug Obtion */
 extern int SHOW_THRESHOLD_IMAGE;
-
+extern int SHOW_FEATURE;
 }

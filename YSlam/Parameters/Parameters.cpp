@@ -14,7 +14,7 @@ namespace dan {
 	int Y_GRID_NUM = 0;
 
 	int SHOW_THRESHOLD_IMAGE = 0;
-
+	int SHOW_FEATURE = 0;
 
 
 
@@ -76,6 +76,11 @@ namespace dan {
 		if (debugOn == 1) {
 			cv::FileNode show_threshold(fsSettings["show_threshold"]);
 			SHOW_THRESHOLD_IMAGE = (int)show_threshold;
+
+			cv::FileNode show_feature(fsSettings["show_feature"]);
+			SHOW_FEATURE = (int)show_feature;
+
+
 		}
 
 		
@@ -86,7 +91,7 @@ namespace dan {
 		std::cout << "x Grid Num : " << X_GRID_NUM << std::endl;
 		std::cout << "y Grid Num : " << Y_GRID_NUM << std::endl;
 		std::cout << "Show threshold image : " << SHOW_THRESHOLD_IMAGE << std::endl;
-
+		std::cout << "Show Feature : " << SHOW_FEATURE << std::endl;
 
 		return true;
 	}

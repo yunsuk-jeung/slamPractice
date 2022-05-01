@@ -20,5 +20,6 @@ yGridNum: 5 # 2^5
 ########## Debug Obtion ##########
 Debug: 1
 show_threshold: 1
+show_feature: 1
 
 
