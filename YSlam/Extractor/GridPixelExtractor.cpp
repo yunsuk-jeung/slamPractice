@@ -81,7 +81,7 @@ void GridPixelExtractor::makeHistogram(float* mag) {
 		for (int j = 0; j < binSize; j++) {
 			count += histBins[i][j];
 			if (count > pixelNum) {
-				histThreshold[i] = j + 15;
+				histThreshold[i] = j + 20;
 				break;
 			}
 		}
@@ -138,11 +138,13 @@ void GridPixelExtractor::process(Frame* frame) {
 	int yPixelNum = _yStep >> 1;
 */
 
-	int xRegion = (_width + 11) / 20;
-	int yRegion = (_height + 11) / 20;
-
 	int xPixelNum = 20;
 	int yPixelNum = 20;
+
+	int xRegion = (_width  + xPixelNum - 1) / xPixelNum;
+	int yRegion = (_height + yPixelNum - 1) / yPixelNum;
+
+
 
 	std::vector<cv::Point2f> uvs;
 
@@ -174,8 +176,8 @@ void GridPixelExtractor::process(Frame* frame) {
 
 					// ±×³É 20 ¹Ú¾Æ³öµµ ±×·²µíÇÔ...?
 					//if (mag[start + row2 + w] > 20) {
-					if (mag[start + row2 + w] > histThreshold[u / _xStep + v/_yStep]) {
-						if (count > 1) {
+					if (mag[start + row2 + w] > histThreshold[u / _xStep + v / _yStep]) {
+						if (count > 0) {
 							continue;
 						}
 						cv::Point2f temp;
@@ -183,6 +185,7 @@ void GridPixelExtractor::process(Frame* frame) {
 						temp.y = v;
 						uvs.push_back(temp);
 						count++;
+						break;
 					}
 				}
 
