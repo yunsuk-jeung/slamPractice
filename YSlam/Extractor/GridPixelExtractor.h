@@ -19,12 +19,14 @@ namespace dan {
 	protected:
 
 	private:
-		void makeHistogram(float* mag);
+		void makeHistogram(Frame* mag);
 		GridPixelExtractor();
 		//std::vector< std::vector <int> > histBins;
 		std::vector<std::vector<int>> histBins;
 		std::vector<int> histThreshold;
-		
+
+		int xPixelSearchNum = 0;
+		int yPixelSearchNum = 0;
 	};
 
 }

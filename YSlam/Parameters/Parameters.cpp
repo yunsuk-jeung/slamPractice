@@ -13,10 +13,11 @@ namespace dan {
 	int X_GRID_NUM = 0;
 	int Y_GRID_NUM = 0;
 
+	int X_PIXEL_SEARCH_NUM = 0;
+	int Y_PIXEL_SEARCH_NUM = 0;
+
 	int SHOW_THRESHOLD_IMAGE = 0;
 	int SHOW_FEATURE = 0;
-
-
 
 	Parameters::Parameters() {}
 
@@ -67,6 +68,11 @@ namespace dan {
 		cv::FileNode yGridNum(fsSettings["yGridNum"]);
 		Y_GRID_NUM = (int)yGridNum;
 
+		cv::FileNode xPixelSearchNum(fsSettings["xPixelSearchNum"]);
+		X_PIXEL_SEARCH_NUM = (int)xPixelSearchNum;
+		 
+		cv::FileNode yPixelSearchNum(fsSettings["yPixelSearchNum"]);
+		Y_PIXEL_SEARCH_NUM = (int)yPixelSearchNum;
 
 		/*Debug Obtion*/
 

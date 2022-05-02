@@ -15,7 +15,8 @@ PyramidLevel: 3
 xGridNum: 5 # 2^5
 yGridNum: 5 # 2^5
 
-
+xPixelSearchNum: 50
+yPixelSearchNum: 50
 
 ########## Debug Obtion ##########
 Debug: 1

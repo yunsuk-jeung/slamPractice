@@ -36,6 +36,9 @@ extern TrackerType TRACKER_TYPE;
 extern int PYRAMID_LEVEL;
 extern int X_GRID_NUM;
 extern int Y_GRID_NUM;
+extern int X_PIXEL_SEARCH_NUM;
+extern int Y_PIXEL_SEARCH_NUM;
+
 
 /* Debug Obtion */
 extern int SHOW_THRESHOLD_IMAGE;
