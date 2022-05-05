@@ -23,6 +23,8 @@ void Frame::createImagePyramid(datastruct::ImagePtr imagePtr) {
 		cv::pyrDown(image, image);
 	}
 
+	features.resize(PYRAMID_LEVEL);
+
 	//for (int i = 0; i < PYRAMID_LEVEL; i++) {
 	//	cv::Mat test;
 	//	test = imagePyramid.images[i];

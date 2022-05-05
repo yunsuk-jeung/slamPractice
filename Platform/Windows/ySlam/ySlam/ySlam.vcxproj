@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\YSlam\datastruct\Feature.h" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Frame.h" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Image.hpp" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\ImagePyramid.hpp" />
@@ -26,6 +27,8 @@
     <ClInclude Include="..\..\..\..\YSlam\Extractor\Extractor.h" />
     <ClInclude Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.h" />
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Initializer\DSInitializer.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Initializer\Initializer.h" />
     <ClInclude Include="..\..\..\..\YSlam\Parameters\Parameters.h" />
     <ClInclude Include="..\..\..\..\YSlam\Tracker\DSTracker.h" />
     <ClInclude Include="..\..\..\..\YSlam\Tracker\Tracker.h" />
@@ -34,10 +37,13 @@
     <ClInclude Include="..\..\..\..\YSlam\Utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\YSlam\datastruct\Feature.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\datastruct\Frame.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Extractor\Extractor.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Initializer\DSInitializer.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Initializer\Initializer.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Parameters\Parameters.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Tracker\DSTracker.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Tracker\Tracker.cpp" />

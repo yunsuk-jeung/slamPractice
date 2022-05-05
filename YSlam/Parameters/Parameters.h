@@ -20,6 +20,11 @@ enum class TrackerType {
 	DENSE_SPARSE = 2,
 };
 
+enum class SystemState {
+	INITIALIZE = 0,
+	TRACKING = 1,
+};
+
 class Parameters {
 public:
 	Parameters();

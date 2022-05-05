@@ -1,13 +1,17 @@
 #include "include/YSlam.h"
-#include "datastruct/Image.hpp"
-#include "Tracker/Tracker.h"
 
+#include "datastruct/Frame.h"
+#include "datastruct/Image.hpp"
+
+#include "Extractor/Extractor.h"
+#include "Tracker/Tracker.h"
 
 namespace dan {
 
 	static YSlam* instance = nullptr;
 
 	Tracker* tracker = nullptr;
+	Extractor* extractor = nullptr;
 
 	YSlam::YSlam() {
 	
@@ -38,6 +42,7 @@ namespace dan {
 		std::cout << "parameter Path : " <<  parameterPath << std::endl;
 		Parameters::getInstance()->setParameters(parameterPath);
 
+		extractor = Extractor::createExtractor(TRACKER_TYPE);
 		tracker = Tracker::createTracker(TRACKER_TYPE);
 
 		return true;
@@ -47,8 +52,6 @@ namespace dan {
 
 		datastruct::ImagePtr image(new datastruct::Image());
 		image->cvImage = cv::Mat(height, width, CV_8UC1);
-
-
 
 		image->timestamp = timestmap;
 		memcpy(image->cvImage.data, data, length);
@@ -61,7 +64,13 @@ namespace dan {
 		image->height = image->cvImage.rows;
 		image->length = image->cvImage.cols * image->cvImage.rows;
 
-		tracker->process(image);
+		Frame* frame = new Frame();
+		frame->createImagePyramid(image);
+		frame->createGradientPyramid();
+		frame->createMagGradientPyramid();
+
+		extractor->process(frame);
+		tracker->process(frame);
 
 	}
 }

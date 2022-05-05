@@ -2,7 +2,7 @@
 
 #include "Extractor/GridPixelExtractor.h"
 #include "datastruct/Frame.h"
-
+#include "datastruct/Feature.h"
 #include "Parameters/Parameters.h"
 
 #include "Utils/Timer.h"
@@ -140,10 +140,11 @@ void GridPixelExtractor::process(Frame* frame) {
 		}
 	}
 
+	/* ------------------------------------------------*/
+	/* ----------------- extract feature --------------*/
+	
 	int pyrlvl = frame->getPyramidLevel();
-
-
-
+	   
 	Statistics::startTimer(EXTRACTION);
 
 	std::vector<std::vector<cv::Point2i>> outPoint;
@@ -165,8 +166,6 @@ void GridPixelExtractor::process(Frame* frame) {
 		for (int i = 0; i < yRegion; i++) {
 			for (int j = 0; j < xRegion; j++) {
 
-
-				//todo uv 로 구해놓고 마지막에 한번에 계산!
 				std::vector<std::pair<int, cv::Point2i>> uvCandiates;
 
 				int row = yPixelNum * i;
@@ -189,7 +188,6 @@ void GridPixelExtractor::process(Frame* frame) {
 						if (u > width)
 							break;
 
-						// 그냥 20 박아놔도 그럴듯함...?
 						//if (mag[start + row2 + w] > 40) {
 						if (mag[start + row2 + w] > histThreshold[(u << lvl) / _xStep + (v << lvl) / _yStep]) {
 
@@ -213,6 +211,22 @@ void GridPixelExtractor::process(Frame* frame) {
 
 	}
 
+
+	for (int i = 0; i < pyrlvl; i++) {
+		int featureSize = outPoint[i].size();
+		frame->features[i].reserve(featureSize);
+		
+		for (int j = 0; j < featureSize; j++) {
+			datastruct::Feature feature(outPoint[i][j].x, outPoint[i][j].y, i);
+
+			frame->features[i].push_back(feature);
+		}
+
+	}
+
+	/* ----------------- extract feature --------------*/
+	/* ------------------------------------------------*/
+
 	Statistics::stopTimer(EXTRACTION);
 
 	std::vector<TIME_PERIOD> statisticArray;
@@ -222,38 +236,34 @@ void GridPixelExtractor::process(Frame* frame) {
 	Statistics::report(statisticArray);
 
 	if (SHOW_FEATURE == 1) {
-		cv::Mat debug;
-		debug = frame->getImagePyramid()->images[0].clone();
 
-		cv::Mat debug2;
-		debug2 = frame->getImagePyramid()->images[1].clone();
+		{
+			cv::Mat debug = frame->getImagePyramid()->images[0].clone();
+			
+			for (int i = 0; i < pyrlvl; i++) {
 
-		cv::Mat debug3;
-		debug3 = frame->getImagePyramid()->images[2].clone();
+			cv::Mat debug1;
+			debug1 = debug.clone();
 
-		cv::cvtColor(debug, debug, cv::COLOR_GRAY2BGR);
-		cv::cvtColor(debug2, debug2, cv::COLOR_GRAY2BGR);
-		cv::cvtColor(debug3, debug3, cv::COLOR_GRAY2BGR);
+			cv::cvtColor(debug1, debug1, cv::COLOR_GRAY2BGR);
 
 
-		for (int j = 0; j < outPoint[0].size(); j++) {
-			cv::circle(debug, cv::Point2i(outPoint[0][j].x, outPoint[0][j].y), 2, cv::Scalar(0, 0, 255), 1);
+
+			for (int j = 0; j < outPoint[i].size(); j++) {
+				cv::circle(debug1, cv::Point2i(outPoint[i][j].x << i, outPoint[i][j].y << i), 2 , cv::Scalar(0, 0, 255), 1);
+			}
+
+
+
+
+			cv::imshow("debug " + std::to_string(i), debug1);
+
+
+			}
+			cv::waitKey();
+
 		}
 
-		for (int j = 0; j < outPoint[1].size(); j++) {
-			cv::circle(debug2, cv::Point2i(outPoint[1][j].x , outPoint[1][j].y), 2, cv::Scalar(0, 255, 0), 1);
-		}
-
-		for (int j = 0; j < outPoint[2].size(); j++) {
-			cv::circle(debug3, cv::Point2i(outPoint[2][j].x, outPoint[2][j].y ), 2, cv::Scalar(255, 0, 0), 1);
-		}
-
-
-		cv::imshow("debug", debug);
-		cv::imshow("debug2", debug2);
-		cv::imshow("debug3", debug3);
-
-		cv::waitKey(1);
 	}
 
 

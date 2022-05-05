@@ -1,21 +1,26 @@
 #pragma once 
 #include <iostream>
-#include "datastruct/Image.hpp"
+#include "Parameters/Parameters.h"
 
 namespace dan {
 
-	enum class TrackerType; 
-	class Tracker {
-	public:
-		Tracker();
-		virtual ~Tracker();
+class Frame;
+class Initializer;
+class Tracker {
+public:
+	virtual ~Tracker();
 
-		static Tracker* createTracker(TrackerType trackerType);
-		
-		virtual void process(datastruct::ImagePtr image) = 0;
+	static Tracker* createTracker(TrackerType trackerType);
 
-	private:
+	virtual void process(Frame* frame) = 0;
 
-	};
+protected:
+	Tracker();
+	Initializer* initializer = nullptr;
+
+	SystemState systemState = SystemState::INITIALIZE;
+
+private:
+};
 
 }

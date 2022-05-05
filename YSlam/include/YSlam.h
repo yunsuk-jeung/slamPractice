@@ -29,6 +29,8 @@ namespace dan {
 
 		void setNewFrame(Byte* data, int length, int width, int height, datastruct::ColorFormat format, unsigned long long int timestmap);
 
+	private:
+
 
 	};
 }

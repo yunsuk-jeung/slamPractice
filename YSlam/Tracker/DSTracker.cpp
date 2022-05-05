@@ -3,42 +3,32 @@
 #include "Tracker/DSTracker.h"
 #include "datastruct/Frame.h"
 
-#include "Extractor/Extractor.h"
-#include "Extractor/GridPixelExtractor.h"
+#include "Initializer/DSInitializer.h"
 
 #include "Parameters/Parameters.h"
 
 namespace dan {
 DSTracker::DSTracker() {
 	std::cout << "Tracker is DSTracker" << std::endl;
+	initializer = Initializer::createInitializer(TRACKER_TYPE);
+}
 
-	extractor = Extractor::createExtractor(TRACKER_TYPE);
+DSTracker* DSTracker::createTracker() {
+	return new DSTracker();
 	
-
 }
+
 DSTracker::~DSTracker() {
-	delete extractor;
 }
 
-void DSTracker::process(datastruct::ImagePtr image) {
+void DSTracker::process(Frame* frame) {
 
-	//cv::imshow("test", image->cvImage);
-	//cv::waitKey(1);
-
-	//will be deleted in map
-	Frame* frame = new Frame();
-	frame->createImagePyramid(image);
-	frame->createGradientPyramid();
-	frame->createMagGradientPyramid();
-
-	extractor->process(frame);
-
-
-
-
-
-
-
+	switch (systemState) {
+	case(SystemState::INITIALIZE): 
+		initializer->process(frame);
+		break;
+	}
+	
 }
 
 }

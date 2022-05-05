@@ -31,6 +31,9 @@
     <Filter Include="ySLAM\Utils">
       <UniqueIdentifier>{23ca0d1b-a001-4cec-ac14-434a8436abf4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ySLAM\Initializer">
+      <UniqueIdentifier>{a3c9d089-2ad8-413f-8b41-2bb2f7e6f545}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h">
@@ -72,6 +75,15 @@
     <ClInclude Include="..\..\..\..\YSlam\Utils\Logger.h">
       <Filter>ySLAM\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\datastruct\Feature.h">
+      <Filter>ySLAM\datastruct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Initializer\Initializer.h">
+      <Filter>ySLAM\Initializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Initializer\DSInitializer.h">
+      <Filter>ySLAM\Initializer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp">
@@ -103,6 +115,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\YSlam\Utils\Logger.cpp">
       <Filter>ySLAM\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\datastruct\Feature.cpp">
+      <Filter>ySLAM\datastruct</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Initializer\Initializer.cpp">
+      <Filter>ySLAM\Initializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Initializer\DSInitializer.cpp">
+      <Filter>ySLAM\Initializer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

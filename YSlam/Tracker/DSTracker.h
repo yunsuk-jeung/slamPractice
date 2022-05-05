@@ -14,13 +14,14 @@ namespace dan {
 	class Extractor;
 	class DSTracker : public Tracker {
 	public:
-		DSTracker();
-		virtual ~DSTracker();
 
-		virtual void process(datastruct::ImagePtr image);
+		static DSTracker* createTracker();
+		virtual ~DSTracker();
+		virtual void process(Frame* frame);
 
 	private:
-		Extractor* extractor = nullptr;
+		DSTracker();
+		
 	};
 
 }
