@@ -13,6 +13,7 @@ public:
 	static DSInitializer* createInitializer();
 	virtual ~DSInitializer();
 	virtual bool process(Frame* frame);
+	
 
 private:
 	DSInitializer();

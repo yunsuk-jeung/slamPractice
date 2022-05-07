@@ -29,9 +29,10 @@ bool DSInitializer::process(Frame* frame) {
 
 	curr = frame;
 
-	std::cout << "Processing Initialize" << std::endl;
+	bool suc= true;
 
-	bool suc = false;
+
+
 
 	if (!suc){
 		delete prev;

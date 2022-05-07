@@ -6,6 +6,8 @@
 #include "Extractor/Extractor.h"
 #include "Tracker/Tracker.h"
 
+#include "flann/config.h"
+
 namespace dan {
 
 	static YSlam* instance = nullptr;

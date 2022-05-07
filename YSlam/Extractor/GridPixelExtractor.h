@@ -14,6 +14,9 @@ namespace dan {
 		virtual void process(Frame* frame);
 		virtual void allocate();
 
+		void extract_scath(Frame* frame);
+		void extract(Frame* frame, int space = 3);
+
 		static GridPixelExtractor* createGridPixelExtractor();
 
 	protected:
