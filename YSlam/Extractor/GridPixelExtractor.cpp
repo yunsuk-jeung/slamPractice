@@ -243,6 +243,7 @@ void GridPixelExtractor::extract(Frame* frame, int space) {
 					int idx2 = (y0123 >> 2) * (_width >> 2) + x0123 >> 2;
 					mag = mag2[idx2];
 
+
 					if (mag > threshold * 0.5) {
 						bestX0 = -2;
 						bestY0 = -2;
