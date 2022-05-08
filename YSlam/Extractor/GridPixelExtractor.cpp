@@ -31,6 +31,13 @@ void GridPixelExtractor::allocate() {
 
 	xPixelSearchNum = X_PIXEL_SEARCH_NUM;
 	yPixelSearchNum = Y_PIXEL_SEARCH_NUM;
+
+	randUC = new unsigned char[_width * _height];
+
+	for (int i = 0; i < _width*_height; i++) {
+		randUC[i] = rand() & 0xFF;
+	}
+
 }
 
 void GridPixelExtractor::makeHistogram(Frame* frame) {
@@ -74,7 +81,7 @@ void GridPixelExtractor::makeHistogram(Frame* frame) {
 		for (int j = 0; j < binSize; j++) {
 			count += histBins[i][j];
 			if (count > pixelNum) {
-				histThreshold[i] = j + 20;
+				histThreshold[i] = j + 7;
 				break;
 			}
 		}
@@ -130,10 +137,11 @@ void GridPixelExtractor::process(Frame* frame) {
 	Statistics::stopTimer(HISTOGRAM);
 
 	extract(frame);
-	//extract_scath(frame);
+	//extract_scath(frame);       
+
 }
 
-void GridPixelExtractor::extract(Frame* frame, int space) {
+void GridPixelExtractor::extract(Frame* frame, int space, float thFactor) {
 
 	std::vector<cv::Mat >& magImages = frame->getMagGradientPyramid()->images;
 	std::vector<cv::Mat >& xImages = frame->getXGradPyramid()->images;
@@ -144,8 +152,14 @@ void GridPixelExtractor::extract(Frame* frame, int space) {
 	float* mag1 = (float*)magImages[1].data;
 	float* mag2 = (float*)magImages[2].data;
 
-	float* dx = (float*)xImages[0].data;
-	float* dy = (float*)yImages[0].data;
+	float* dx0 = (float*)xImages[0].data;
+	float* dx1 = (float*)xImages[1].data;
+	float* dx2 = (float*)xImages[2].data;
+
+	float* dy0 = (float*)yImages[0].data;
+	float* dy1 = (float*)yImages[1].data;
+	float* dy2 = (float*)yImages[2].data;
+
 
 	const Eigen::Vector2f directions[16] = {
 		 Eigen::Vector2f(0,    1.0000),
@@ -165,43 +179,55 @@ void GridPixelExtractor::extract(Frame* frame, int space) {
 		 Eigen::Vector2f(1.0000,    0.0000),
 		 Eigen::Vector2f(0.1951,   -0.9808) };
 
-	int dx0 = 4 * space;
-	int dy0 = 4 * space;
-	int dx1 = 2 * space;
-	int dy1 = 2 * space;
-	int dx2 = space;
-	int dy2 = space;
+	int dw0 = 4 * space;
+	int dh0 = 4 * space;
+	int dw1 = 2 * space;
+	int dh1 = 2 * space;
+	int dw2 = space;
+	int dh2 = space;
 
-	for (int y0 = 0; y0 < _height; y0 += dy0) for (int x0 = 0; x0 < _width; x0 += dx0) {
+	int n0 = 0, n1 = 0, n2 = 0;
+
+	std::vector<cv::Point2i> test0;
+	std::vector<cv::Point2i> test1;
+	std::vector<cv::Point2i> test2;
+
+	for (int y0 = 0; y0 < _height; y0 += dh0) for (int x0 = 0; x0 < _width; x0 += dh0) {
+
+
+		int w1 = (dw0 > _width - x0) ? _width - x0 : dw0;
+		int h1 = (dh0 > _height - y0) ? _height - y0 : dh0;
 
 		int bestX2 = -1;
 		int bestY2 = -1;
+		float bestN2 = 0;
+		Eigen::Vector2f dir2 = directions[randUC[n2] & 0xF];
 
-		int w1 = (dx0 > _width - x0) ? _width - x0 : dx0;
-		int h1 = (dy0 > _height - y0) ? _height - y0 : dy0;
-
-		for (int y1 = 0; y1 < h1; y1 += dy1) for (int x1 = 0; x1 < w1; x1 += dx1) {
-
-			int bestX1 = -1;
-			int bestY1 = -1;
+		for (int y1 = 0; y1 < h1; y1 += dh1) for (int x1 = 0; x1 < w1; x1 += dw1) {
 
 			int x01 = x0 + x1;
 			int y01 = y0 + y1;
 
-			int w2 = (dx1 > _width - x01) ? _width - x01 : dx1;
-			int h2 = (dy1 > _height - y01) ? _height - y01 : dy1;
+			int w2 = (dw1 > _width - x01) ? _width - x01 : dw1;
+			int h2 = (dh1 > _height - y01) ? _height - y01 : dh1;
 
-			for (int y2 = 0; y2 < h2; y2 += dy2) for (int x2 = 0; x2 < w2; x2 += dx2) {
+			int bestX1 = -1;
+			int bestY1 = -1;
+			float bestN1 = 0;
+			Eigen::Vector2f dir1 = directions[randUC[n1] & 0xF];
 
-
-				int bestX0 = -1;
-				int bestY0 = -1;
+			for (int y2 = 0; y2 < h2; y2 += dh2) for (int x2 = 0; x2 < w2; x2 += dw2) {
 
 				int x012 = x01 + x2;
 				int y012 = y01 + y2;
 
-				int w3 = (dx2 > _width - x012) ? _width - x012 : dx2;
-				int h3 = (dy2 > _height - y012) ? _height - y012 : dy2;
+				int w3 = (dw2 > _width - x012) ? _width - x012 : dw2;
+				int h3 = (dh2 > _height - y012) ? _height - y012 : dh2;
+
+				int bestX0 = -1;
+				int bestY0 = -1;
+				float bestN0 = 0;
+				Eigen::Vector2f dir0 = directions[randUC[n0] & 0xF];
 
 				for (int y3 = 0; y3 < h3; y3++) for (int x3 = 0; x3 < w3; x3++) {
 
@@ -213,70 +239,151 @@ void GridPixelExtractor::extract(Frame* frame, int space) {
 
 					int idx = y0123 * _width + x0123;
 
-					float threshold = histThreshold[(y0123 >> 5) * _xGridNum + (x0123 >> 5)];
+					float threshold = histThreshold[(y0123 >> 5) * _xGridNum + (x0123 >> 5)] * thFactor;
 					float mag = mag0[idx];
 
 					if (mag > threshold) {
-						bestX0 = x0123;
-						bestY0 = y0123;
-						bestX1 = -2;
-						bestY1 = -2;
-						bestX2 = -2;
-						bestY2 = -2;
+
+						Eigen::Vector2f dI0(dx0[idx], dy0[idx]);
+						float norm = fabs(dI0.dot(dir0));
+
+						if (norm > bestN0) {
+							bestN0 = norm;
+							bestX0 = x0123;
+							bestY0 = y0123;
+							bestX1 = -2;
+							bestY1 = -2;
+							bestX2 = -2;
+							bestY2 = -2;
+
+						}
+
 					}
 					if (bestX1 == -2) continue;
-					
-
 
 					int idx1 = (y0123 >> 1) * (_width >> 1) + x0123 >> 1;
 					mag = mag1[idx1];
-					if (mag > threshold * 075) {
-						bestX0 = -2;
-						bestY0 = -2;
-						bestX1 = x0123;
-						bestY1 = y0123;
-						bestX2 = -2;
-						bestY2 = -2;
+					if (mag > threshold * 0.75) {
+
+						Eigen::Vector2f dI1(dx1[idx1], dy1[idx1]);
+						float norm = dI1.dot(dir1);
+
+						if (norm > bestN1) {
+
+							bestN1 = norm;
+							bestX0 = -2;
+							bestY0 = -2;
+							bestX1 = x0123;
+							bestY1 = y0123;
+							bestX2 = -2;
+							bestY2 = -2;
+						}
 					}
-					if (bestX1 == -2) continue;
+					if (bestX2 == -2) continue;
 
 					int idx2 = (y0123 >> 2) * (_width >> 2) + x0123 >> 2;
 					mag = mag2[idx2];
 
-
 					if (mag > threshold * 0.5) {
-						bestX0 = -2;
-						bestY0 = -2;
-						bestX1 = -2;
-						bestY1 = -2;
-						bestX2 = x0123;
-						bestY2 = y0123;
+
+						Eigen::Vector2f dI2(dx2[idx2], dy2[idx2]);
+						float norm = dI2.dot(dir2);
+
+						if (norm > bestN2) {
+
+							bestN2 = norm;
+							bestX0 = -2;
+							bestY0 = -2;
+							bestX1 = -2;
+							bestY1 = -2;
+							bestX2 = x0123;
+							bestY2 = y0123;
+
+						}
 					}
 
-					//int fistIdx = y0123 /  
-
-					//if (mag0[idx] > histThreshold[]) {
-
-					//}
 				}
-				
-				if (bestX0 >0) {
-				
+
+				if (bestX0 > 0) {
+					test0.push_back(cv::Point2i(bestX0, bestY0));
+					n0++;
+					bestN1 = 1e10;
 				}
 
 			}
 
 			if (bestX1 > 0) {
+				test1.push_back(cv::Point2i(bestX1, bestY1));
+
+				n1++;
+				bestN2 = 1e10;
 			}
 
 		}
 
 		if (bestX2 > 0) {
+			test2.push_back(cv::Point2i(bestX2, bestY2));
+			n2++;
 		}
 
-
-
 	}
+
+	if (SHOW_FEATURE) {
+
+		cv::Mat testImage0 = frame->getImagePyramid()->images[0].clone();
+		cv::Mat testImage1 = frame->getImagePyramid()->images[0].clone();
+		cv::Mat testImage2 = frame->getImagePyramid()->images[0].clone();
+
+		cv::cvtColor(testImage0, testImage0, CV_GRAY2BGR);
+		cv::cvtColor(testImage1, testImage1, CV_GRAY2BGR);
+		cv::cvtColor(testImage2, testImage2, CV_GRAY2BGR);
+
+		for (int i = 0; i < test0.size(); i++) {
+			cv::circle(testImage0, test0[i], 3, cv::Scalar(0, 0, 255));
+		}
+
+		for (int i = 0; i < testImage0.rows; i += space) {
+			cv::line(testImage0, cv::Point2i(0, i), cv::Point2i(testImage0.cols, i), cv::Scalar(255, 255, 0));
+		}
+		for (int i = 0; i < testImage0.cols; i += space) {
+			cv::line(testImage0, cv::Point2i(i, 0), cv::Point2i(i, testImage0.rows), cv::Scalar(255, 255, 0));
+		}
+
+		for (int i = 0; i < test1.size(); i++) {
+			cv::circle(testImage1, test1[i], 3, cv::Scalar(0, 255, 0));
+		}
+		for (int i = 0; i < testImage0.rows; i += (space << 1)) {
+			cv::line(testImage1, cv::Point2i(0, i), cv::Point2i(testImage0.cols, i), cv::Scalar(255, 255, 0));
+		}
+		for (int i = 0; i < testImage0.cols; i += (space << 1)) {
+			cv::line(testImage1, cv::Point2i(i, 0), cv::Point2i(i, testImage0.rows), cv::Scalar(255, 255, 0));
+		}
+
+		for (int i = 0; i < test2.size(); i++) {
+			cv::circle(testImage2, test2[i], 3, cv::Scalar(255, 0, 0));
+		}
+
+		for (int i = 0; i < testImage0.rows; i += (space << 2)) {
+			cv::line(testImage2, cv::Point2i(0, i), cv::Point2i(testImage0.cols, i), cv::Scalar(255, 255, 0));
+		}
+		for (int i = 0; i < testImage0.cols; i += (space << 2)) {
+			cv::line(testImage2, cv::Point2i(i, 0), cv::Point2i(i, testImage0.rows), cv::Scalar(255, 255, 0));
+		}
+
+		cv::imshow("mag0", magImages[0] / 255);
+		cv::imshow("mag1", magImages[1] / 255);
+		cv::imshow("mag2", magImages[2] / 255);
+
+
+		cv::hconcat(testImage0, testImage1, testImage1);
+		cv::hconcat(testImage1, testImage2, testImage2);
+		cv::imshow("testImage", testImage2);
+		cv::waitKey(1);
+	}
+
+
+	std::cout << n0 << " " << n1 << " " << n2 << std::endl;
+
 }
 
 

@@ -15,7 +15,7 @@ namespace dan {
 		virtual void allocate();
 
 		void extract_scath(Frame* frame);
-		void extract(Frame* frame, int space = 3);
+		void extract(Frame* frame, int space = 12, float thFactor = 2.0f);
 
 		static GridPixelExtractor* createGridPixelExtractor();
 
@@ -24,9 +24,11 @@ namespace dan {
 	private:
 		void makeHistogram(Frame* mag);
 		GridPixelExtractor();
-		//std::vector< std::vector <int> > histBins;
+
 		std::vector<std::vector<int>> histBins;
 		std::vector<int> histThreshold;
+		
+		unsigned char* randUC = nullptr;
 
 		int xPixelSearchNum = 0;
 		int yPixelSearchNum = 0;
