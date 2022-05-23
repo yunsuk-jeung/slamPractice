@@ -15,7 +15,7 @@ namespace datastruct {
 
 		int lvl = 0;
 		
-		// uv coordinate in lvl 0
+			
 		Eigen::Vector2f uv;
 		
 	private:

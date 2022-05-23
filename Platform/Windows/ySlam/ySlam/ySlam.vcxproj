@@ -26,6 +26,7 @@
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Types.h" />
     <ClInclude Include="..\..\..\..\YSlam\Extractor\Extractor.h" />
     <ClInclude Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Graph\Graph.h" />
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h" />
     <ClInclude Include="..\..\..\..\YSlam\Initializer\DSInitializer.h" />
     <ClInclude Include="..\..\..\..\YSlam\Initializer\Initializer.h" />
@@ -41,6 +42,7 @@
     <ClCompile Include="..\..\..\..\YSlam\datastruct\Frame.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Extractor\Extractor.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Graph\Graph.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Initializer\DSInitializer.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Initializer\Initializer.cpp" />

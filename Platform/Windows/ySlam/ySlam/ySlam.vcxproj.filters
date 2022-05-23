@@ -34,6 +34,9 @@
     <Filter Include="ySLAM\Initializer">
       <UniqueIdentifier>{a3c9d089-2ad8-413f-8b41-2bb2f7e6f545}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ySLAM\Graph">
+      <UniqueIdentifier>{1eeaa11e-de90-4a41-bd9e-528aaaba4173}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h">
@@ -84,6 +87,9 @@
     <ClInclude Include="..\..\..\..\YSlam\Initializer\DSInitializer.h">
       <Filter>ySLAM\Initializer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Graph\Graph.h">
+      <Filter>ySLAM\Graph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp">
@@ -124,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\YSlam\Initializer\DSInitializer.cpp">
       <Filter>ySLAM\Initializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Graph\Graph.cpp">
+      <Filter>ySLAM\Graph</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
