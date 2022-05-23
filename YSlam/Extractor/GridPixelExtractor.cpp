@@ -136,12 +136,13 @@ void GridPixelExtractor::process(Frame* frame) {
 
 	Statistics::stopTimer(HISTOGRAM);
 
-	extract(frame);
+	extractInOrigin(frame);
+
 	//extract_scath(frame);       
 
 }
 
-void GridPixelExtractor::extract(Frame* frame, int space, float thFactor) {
+void GridPixelExtractor::extractInOrigin(Frame* frame, int space, float thFactor) {
 
 	std::vector<cv::Mat >& magImages = frame->getMagGradientPyramid()->images;
 	std::vector<cv::Mat >& xImages = frame->getXGradPyramid()->images;
@@ -386,6 +387,36 @@ void GridPixelExtractor::extract(Frame* frame, int space, float thFactor) {
 
 }
 
+void GridPixelExtractor::extractInPyramid(Frame* frame, int space, float thFactor) {
+
+	std::vector<cv::Mat >& magImages = frame->getMagGradientPyramid()->images;
+	std::vector<cv::Mat >& xImages = frame->getXGradPyramid()->images;
+	std::vector<cv::Mat >& yImages = frame->getYGradPyramid()->images;
+
+	int pyrlvl = frame->getPyramidLevel();
+
+	for (int i = 0; i++; i < pyrlvl) {
+		float* mag = (float*)magImages[i].data;
+		float* dIdx = (float*)xImages[i].data;
+		float* dIdy = (float*)yImages[i].data;
+
+		int width = magImages[i].cols;
+		int height = magImages[i].rows;
+
+		int dw = space;
+		int dh = space;
+
+		for (int y0 = 0; y0 < height; y0 += dh) for (int x0 = 0; x0 < width; x0 += dw) {
+
+			for (int y1 = 0; y1 < dh; y1++) for (int x1 = 0; x1 < dw; x1++) {
+
+
+			}
+		}
+	}
+
+
+}
 
 void GridPixelExtractor::extract_scath(Frame* frame) {
 	int pyrlvl = frame->getPyramidLevel();
