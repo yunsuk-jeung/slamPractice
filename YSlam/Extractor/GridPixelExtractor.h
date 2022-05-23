@@ -15,7 +15,9 @@ namespace dan {
 		virtual void allocate();
 
 		void extract_scath(Frame* frame);
-		void extract(Frame* frame, int space = 12, float thFactor = 2.0f);
+
+		void extractInOrigin(Frame* frame, int space = 12, float thFactor = 2.0f);
+		void extractInPyramid(Frame* frame, int space = 12, float thFactor = 2.0f);
 
 		static GridPixelExtractor* createGridPixelExtractor();
 
