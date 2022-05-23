@@ -396,9 +396,9 @@ void GridPixelExtractor::extractInPyramid(Frame* frame, int space, float thFacto
 	int pyrlvl = frame->getPyramidLevel();
 
 	for (int i = 0; i++; i < pyrlvl) {
-		float* mag = (float*)magImages[i].data;
-		float* dIdx = (float*)xImages[i].data;
-		float* dIdy = (float*)yImages[i].data;
+		float* mags = (float*)magImages[i].data;
+		float* dIdxs = (float*)xImages[i].data;
+		float* dIdys = (float*)yImages[i].data;
 
 		int width = magImages[i].cols;
 		int height = magImages[i].rows;
@@ -408,8 +408,34 @@ void GridPixelExtractor::extractInPyramid(Frame* frame, int space, float thFacto
 
 		for (int y0 = 0; y0 < height; y0 += dh) for (int x0 = 0; x0 < width; x0 += dw) {
 
+			int bestXX = -1;
+			int bestXY = -1;
+			int bestYX = -1;
+			int bestYY = -1;
+
 			for (int y1 = 0; y1 < dh; y1++) for (int x1 = 0; x1 < dw; x1++) {
 
+				int x01 = x0 + x1;
+				int y01 = y0 + y1;
+
+				int idx = x01 + y01 * width;
+
+				float mag = mags[idx];
+				float threshold = 7.5;
+
+				if (mag > threshold * threshold) {
+					float dIdx = fabs(dIdxs[idx]);
+					float dIdy = fabs(dIdys[idx]);
+					float dxdy = fabs(dIdx - dIdy);
+					float dydx = fabs(dIdx + dIdy);
+
+					if (dIdx > bestXX) { bestXX = dIdx; bestXX = idx; }
+					if (dIdy > bestYY) { bestYY = dIdy; bestYY = idx; }
+					if (dxdy > bestXY) { bestXY = dxdy; bestXX = idx; }
+					if (dydx > bestYX) { bestXX = dydx; bestXX = idx; }
+
+				}
+				
 
 			}
 		}
