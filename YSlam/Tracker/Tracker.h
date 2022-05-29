@@ -6,12 +6,16 @@ namespace dan {
 
 class Frame;
 class Initializer;
+class Graph;
 class Tracker {
 public:
-	virtual ~Tracker();
+	
 
 	static Tracker* createTracker(TrackerType trackerType);
 
+	void setGraph(Graph* _graph);
+
+	virtual ~Tracker();
 	virtual void process(Frame* frame) = 0;
 
 protected:
@@ -19,7 +23,7 @@ protected:
 	Initializer* initializer = nullptr;
 
 	SystemState systemState = SystemState::INITIALIZE;
-
+	Graph* graph;
 private:
 };
 

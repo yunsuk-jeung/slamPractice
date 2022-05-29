@@ -15,5 +15,8 @@ namespace dan {
 		
 		return nullptr;
 	}
+	void Initializer::setGraph(Graph* _graph) {
+		graph = _graph;
+	}
 
 }

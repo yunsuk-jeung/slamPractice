@@ -25,7 +25,7 @@ void Frame::createImagePyramid(datastruct::ImagePtr imagePtr) {
 
 	features.resize(PYRAMID_LEVEL);
 
-	for (int i = 0; features.size(); i++) {
+	for (int i = 0; i < features.size(); i++) {
 		features[i].reserve(400);
 	}
 
@@ -122,5 +122,6 @@ datastruct::ImagePyramid* Frame::getYGradPyramid() {
 datastruct::ImagePyramid* Frame::getMagGradientPyramid() {
 	return &magGradientPyramid;
 }
+
 
 }

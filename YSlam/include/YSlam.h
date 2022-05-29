@@ -26,11 +26,10 @@ namespace dan {
 		static void deleteInstance();
 
 		bool init(std::string dataPath, std::string parameterPath);
-
 		void setNewFrame(Byte* data, int length, int width, int height, datastruct::ColorFormat format, unsigned long long int timestmap);
 
 	private:
-
+		
 
 	};
 }

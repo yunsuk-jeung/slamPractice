@@ -27,7 +27,6 @@ namespace dan {
 		datastruct::ImagePyramid* getMagGradientPyramid();
 
 		std::vector<std::vector< datastruct::Feature >> features;
-
 	private:
 		datastruct::ImagePyramid imagePyramid;
 		datastruct::ImagePyramid xGradientPyramid;

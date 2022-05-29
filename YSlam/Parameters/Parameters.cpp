@@ -17,7 +17,8 @@ namespace dan {
 	int Y_PIXEL_SEARCH_NUM = 0;
 
 	int SHOW_THRESHOLD_IMAGE = 0;
-	int SHOW_FEATURE = 0;
+	int SHOW_ORIGIN_FEATURE = 0;
+	int SHOW_PYRAMID_FEATRUE = 0;
 
 	Parameters::Parameters() {}
 
@@ -83,8 +84,11 @@ namespace dan {
 			cv::FileNode show_threshold(fsSettings["show_threshold"]);
 			SHOW_THRESHOLD_IMAGE = (int)show_threshold;
 
-			cv::FileNode show_feature(fsSettings["show_feature"]);
-			SHOW_FEATURE = (int)show_feature;
+			cv::FileNode show_feature(fsSettings["show_origin_feature"]);
+			SHOW_ORIGIN_FEATURE = (int)show_feature;
+
+			cv::FileNode show_pyramid_feature(fsSettings["show_pyramid_feature"]);
+			SHOW_PYRAMID_FEATRUE = (int)show_pyramid_feature;
 
 
 		}
@@ -97,8 +101,8 @@ namespace dan {
 		std::cout << "x Grid Num : " << X_GRID_NUM << std::endl;
 		std::cout << "y Grid Num : " << Y_GRID_NUM << std::endl;
 		std::cout << "Show threshold image : " << SHOW_THRESHOLD_IMAGE << std::endl;
-		std::cout << "Show Feature : " << SHOW_FEATURE << std::endl;
-
+		std::cout << "Show Origin Feature : " << SHOW_ORIGIN_FEATURE << std::endl;
+		std::cout << "Show Pyramid Feature : " << SHOW_PYRAMID_FEATRUE << std::endl;
 		return true;
 	}
 

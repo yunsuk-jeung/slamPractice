@@ -2,7 +2,6 @@
 
 #include "Extractor/GridPixelExtractor.h"
 #include "datastruct/Frame.h"
-#include "datastruct/Feature.h"
 #include "Parameters/Parameters.h"
 
 #include "Utils/Timer.h"
@@ -137,8 +136,42 @@ void GridPixelExtractor::process(Frame* frame) {
 	Statistics::stopTimer(HISTOGRAM);
 
 	extractInOrigin(frame);
+	extractInPyramid(frame);
 
-	//extract_scath(frame);       
+	if (SHOW_ORIGIN_FEATURE) {
+
+		cv::Mat testImage0 = frame->getImagePyramid()->images[0].clone();
+		cv::cvtColor(testImage0, testImage0, CV_GRAY2BGR);
+
+		std::vector<datastruct::Feature>& feature = frame->features[0];
+
+		for (int i = 0; i < feature.size(); i++) {
+			cv::circle(testImage0, cv::Point2f(feature[i].uv.x(), feature[i].uv.y()), 3, cv::Scalar(0, 0, 255));
+		}
+
+		cv::imshow("testImage", testImage0);
+		cv::waitKey(1);
+	}
+
+	if (SHOW_PYRAMID_FEATRUE) {
+
+		for (int i = 1; i < frame->getPyramidLevel(); i++) {
+
+			cv::Mat image = frame->getImagePyramid()->images[0];
+			cv::cvtColor(image, image, CV_GRAY2BGR);
+			std::vector<datastruct::Feature>& feature = frame->features[i];
+
+			std::cout << "feature size : " << feature.size() << std::endl;
+ 			for (int ii = 0; ii < feature.size(); ii++) {
+				cv::circle(image, cv::Point2f(feature[ii].uv.x(), feature[ii].uv.y()) * (1 << i), 3, cv::Scalar(0, 0, 255));
+			}
+
+			cv::imshow("debug" + std::to_string(i), image);
+			cv::waitKey(1);
+
+		}
+
+	}     
 
 }
 
@@ -147,6 +180,8 @@ void GridPixelExtractor::extractInOrigin(Frame* frame, int space, float thFactor
 	std::vector<cv::Mat >& magImages = frame->getMagGradientPyramid()->images;
 	std::vector<cv::Mat >& xImages = frame->getXGradPyramid()->images;
 	std::vector<cv::Mat >& yImages = frame->getYGradPyramid()->images;
+
+	std::vector<datastruct::Feature>& features = frame->features[0];
 
 
 	float* mag0 = (float*)magImages[0].data;
@@ -188,10 +223,6 @@ void GridPixelExtractor::extractInOrigin(Frame* frame, int space, float thFactor
 	int dh2 = space;
 
 	int n0 = 0, n1 = 0, n2 = 0;
-
-	std::vector<cv::Point2i> test0;
-	std::vector<cv::Point2i> test1;
-	std::vector<cv::Point2i> test2;
 
 	for (int y0 = 0; y0 < _height; y0 += dh0) for (int x0 = 0; x0 < _width; x0 += dh0) {
 
@@ -306,7 +337,7 @@ void GridPixelExtractor::extractInOrigin(Frame* frame, int space, float thFactor
 				}
 
 				if (bestX0 > 0) {
-					test0.push_back(cv::Point2i(bestX0, bestY0));
+					features.push_back(datastruct::Feature(bestX0, bestY0, 0));
 					n0++;
 					bestN1 = 1e10;
 				}
@@ -314,7 +345,7 @@ void GridPixelExtractor::extractInOrigin(Frame* frame, int space, float thFactor
 			}
 
 			if (bestX1 > 0) {
-				test1.push_back(cv::Point2i(bestX1, bestY1));
+				features.push_back(datastruct::Feature(bestX1, bestY1, 0));
 
 				n1++;
 				bestN2 = 1e10;
@@ -323,67 +354,14 @@ void GridPixelExtractor::extractInOrigin(Frame* frame, int space, float thFactor
 		}
 
 		if (bestX2 > 0) {
-			test2.push_back(cv::Point2i(bestX2, bestY2));
+			features.push_back(datastruct::Feature(bestX2, bestY2, 0));
+
 			n2++;
 		}
 
 	}
 
-	if (SHOW_FEATURE) {
-
-		cv::Mat testImage0 = frame->getImagePyramid()->images[0].clone();
-		cv::Mat testImage1 = frame->getImagePyramid()->images[0].clone();
-		cv::Mat testImage2 = frame->getImagePyramid()->images[0].clone();
-
-		cv::cvtColor(testImage0, testImage0, CV_GRAY2BGR);
-		cv::cvtColor(testImage1, testImage1, CV_GRAY2BGR);
-		cv::cvtColor(testImage2, testImage2, CV_GRAY2BGR);
-
-		for (int i = 0; i < test0.size(); i++) {
-			cv::circle(testImage0, test0[i], 3, cv::Scalar(0, 0, 255));
-		}
-
-		for (int i = 0; i < testImage0.rows; i += space) {
-			cv::line(testImage0, cv::Point2i(0, i), cv::Point2i(testImage0.cols, i), cv::Scalar(255, 255, 0));
-		}
-		for (int i = 0; i < testImage0.cols; i += space) {
-			cv::line(testImage0, cv::Point2i(i, 0), cv::Point2i(i, testImage0.rows), cv::Scalar(255, 255, 0));
-		}
-
-		for (int i = 0; i < test1.size(); i++) {
-			cv::circle(testImage1, test1[i], 3, cv::Scalar(0, 255, 0));
-		}
-		for (int i = 0; i < testImage0.rows; i += (space << 1)) {
-			cv::line(testImage1, cv::Point2i(0, i), cv::Point2i(testImage0.cols, i), cv::Scalar(255, 255, 0));
-		}
-		for (int i = 0; i < testImage0.cols; i += (space << 1)) {
-			cv::line(testImage1, cv::Point2i(i, 0), cv::Point2i(i, testImage0.rows), cv::Scalar(255, 255, 0));
-		}
-
-		for (int i = 0; i < test2.size(); i++) {
-			cv::circle(testImage2, test2[i], 3, cv::Scalar(255, 0, 0));
-		}
-
-		for (int i = 0; i < testImage0.rows; i += (space << 2)) {
-			cv::line(testImage2, cv::Point2i(0, i), cv::Point2i(testImage0.cols, i), cv::Scalar(255, 255, 0));
-		}
-		for (int i = 0; i < testImage0.cols; i += (space << 2)) {
-			cv::line(testImage2, cv::Point2i(i, 0), cv::Point2i(i, testImage0.rows), cv::Scalar(255, 255, 0));
-		}
-
-		cv::imshow("mag0", magImages[0] / 255);
-		cv::imshow("mag1", magImages[1] / 255);
-		cv::imshow("mag2", magImages[2] / 255);
-
-
-		cv::hconcat(testImage0, testImage1, testImage1);
-		cv::hconcat(testImage1, testImage2, testImage2);
-		cv::imshow("testImage", testImage2);
-		cv::waitKey(1);
-	}
-
-
-	std::cout << n0 << " " << n1 << " " << n2 << std::endl;
+	std::cout << "extract num : " << n0 << " " << n1 << " " << n2 << std::endl;
 
 }
 
@@ -393,9 +371,11 @@ void GridPixelExtractor::extractInPyramid(Frame* frame, int space, float thFacto
 	std::vector<cv::Mat >& xImages = frame->getXGradPyramid()->images;
 	std::vector<cv::Mat >& yImages = frame->getYGradPyramid()->images;
 
+	std::vector<cv::Mat>& images = frame->getImagePyramid()->images;
+
 	int pyrlvl = frame->getPyramidLevel();
 
-	for (int i = 0; i++; i < pyrlvl) {
+	for (int i = 1; i < pyrlvl; i++) {
 		float* mags = (float*)magImages[i].data;
 		float* dIdxs = (float*)xImages[i].data;
 		float* dIdys = (float*)yImages[i].data;
@@ -406,6 +386,11 @@ void GridPixelExtractor::extractInPyramid(Frame* frame, int space, float thFacto
 		int dw = space;
 		int dh = space;
 
+		cv::Mat image = images[i].clone();
+		cv::cvtColor(image, image, CV_GRAY2BGR);
+
+		std::vector<datastruct::Feature>& features = frame->features[i];
+
 		for (int y0 = 0; y0 < height; y0 += dh) for (int x0 = 0; x0 < width; x0 += dw) {
 
 			int bestXX = -1;
@@ -413,10 +398,19 @@ void GridPixelExtractor::extractInPyramid(Frame* frame, int space, float thFacto
 			int bestYX = -1;
 			int bestYY = -1;
 
+			int bestXXidx = -1;
+			int bestXYidx = -1;
+			int bestYXidx = -1;
+			int bestYYidx = -1;
+
 			for (int y1 = 0; y1 < dh; y1++) for (int x1 = 0; x1 < dw; x1++) {
 
 				int x01 = x0 + x1;
 				int y01 = y0 + y1;
+
+				if (x01 >= width || y01 >= height) {
+					break;
+				}
 
 				int idx = x01 + y01 * width;
 
@@ -429,16 +423,46 @@ void GridPixelExtractor::extractInPyramid(Frame* frame, int space, float thFacto
 					float dxdy = fabs(dIdx - dIdy);
 					float dydx = fabs(dIdx + dIdy);
 
-					if (dIdx > bestXX) { bestXX = dIdx; bestXX = idx; }
-					if (dIdy > bestYY) { bestYY = dIdy; bestYY = idx; }
-					if (dxdy > bestXY) { bestXY = dxdy; bestXX = idx; }
-					if (dydx > bestYX) { bestXX = dydx; bestXX = idx; }
+					if (dIdx > bestXX) { bestXX = dIdx; bestXXidx = idx; continue; }
+					if (dIdy > bestYY) { bestYY = dIdy; bestYYidx = idx; continue; }
+					if (dxdy > bestXY) { bestXY = dxdy; bestXYidx = idx; continue; }
+					if (dydx > bestYX) { bestYX = dydx; bestYXidx = idx; continue; }
 
 				}
-				
+			}
+
+
+			if (bestXXidx != -1) {
+				int y1 = bestXXidx / width;
+				int x1 = bestXXidx - y1 * width;
+				features.push_back(datastruct::Feature(x1, y1, i));
+			}
+
+			if (bestXXidx != -1) {
+				int y2 = bestYYidx / width;
+				int x2 = bestYYidx - y2 * width;
+				features.push_back(datastruct::Feature(x2, y2, i));
 
 			}
+
+			if (bestXYidx != -1) {
+
+				int y3 = bestXYidx / width;
+				int x3 = bestXYidx - y3 * width;
+				features.push_back(datastruct::Feature(x3, y3, i));
+			}
+
+			if (bestYXidx != -1) {
+
+				int y4 = bestYXidx / width;
+				int x4 = bestYXidx - y4 * width;
+				features.push_back(datastruct::Feature(x4, y4, i));
+			}
+
 		}
+
+
+
 	}
 
 
@@ -538,7 +562,7 @@ void GridPixelExtractor::extract_scath(Frame* frame) {
 
 	Statistics::report(statisticArray);
 
-	if (SHOW_FEATURE == 1) {
+	if (SHOW_ORIGIN_FEATURE == 1) {
 
 		{
 			cv::Mat debug = frame->getImagePyramid()->images[0].clone();

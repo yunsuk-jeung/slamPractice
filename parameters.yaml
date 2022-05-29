@@ -22,6 +22,7 @@ yPixelSearchNum: 50
 ########## Debug Obtion ##########
 Debug: 1
 show_threshold: 0
-show_feature: 1
+show_origin_feature: 1
+show_pyramid_feature: 1
 
 

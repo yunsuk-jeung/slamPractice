@@ -5,7 +5,7 @@
 
 namespace dan {
 	class Frame;
-
+	class Graph;
 	enum class TrackerType;
 	class Extractor{
 	public:
@@ -33,6 +33,8 @@ namespace dan {
 		// grid Step
 		int _xStep = 0;
 		int _yStep = 0;
+
+		Graph* graph = nullptr;
 
 	private:
 

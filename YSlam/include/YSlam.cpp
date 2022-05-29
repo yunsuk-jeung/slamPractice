@@ -6,6 +6,8 @@
 #include "Extractor/Extractor.h"
 #include "Tracker/Tracker.h"
 
+#include "Graph/Graph.h"
+
 #include "flann/config.h"
 
 namespace dan {
@@ -14,12 +16,27 @@ namespace dan {
 
 	Tracker* tracker = nullptr;
 	Extractor* extractor = nullptr;
+	Graph* graph = nullptr;
 
 	YSlam::YSlam() {
-	
 	}
+
 	YSlam::~YSlam() {
-	
+		if (tracker != nullptr) {
+			delete tracker;
+			tracker = nullptr;
+		}
+
+		if (extractor != nullptr) {
+			delete extractor;
+			extractor = nullptr;
+		}
+
+		if (graph != nullptr) {
+			delete graph;
+			graph = nullptr;
+		}
+
 	}
 
 	YSlam* YSlam::getInstance() {
@@ -42,10 +59,17 @@ namespace dan {
 	bool YSlam::init(std::string dataPath, std::string parameterPath) {
 
 		std::cout << "parameter Path : " <<  parameterPath << std::endl;
-		Parameters::getInstance()->setParameters(parameterPath);
+		bool parameterSet = Parameters::getInstance()->setParameters(parameterPath);
 
+		if (!parameterSet) {
+			std::cout << "Parameter Setting fail" << std::endl;
+			return false;
+		}
+
+		graph = new Graph();
 		extractor = Extractor::createExtractor(TRACKER_TYPE);
 		tracker = Tracker::createTracker(TRACKER_TYPE);
+		tracker->setGraph(graph);
 
 		return true;
 	}
@@ -71,7 +95,7 @@ namespace dan {
 		frame->createGradientPyramid();
 		frame->createMagGradientPyramid();
 
-		extractor->process(frame);
+		//extractor->process(frame);
 		tracker->process(frame);
 
 	}

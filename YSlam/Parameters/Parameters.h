@@ -47,5 +47,6 @@ extern int Y_PIXEL_SEARCH_NUM;
 
 /* Debug Obtion */
 extern int SHOW_THRESHOLD_IMAGE;
-extern int SHOW_FEATURE;
+extern int SHOW_ORIGIN_FEATURE;
+extern int SHOW_PYRAMID_FEATRUE;
 }

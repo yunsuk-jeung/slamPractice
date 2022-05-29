@@ -16,9 +16,10 @@ public:
 	Graph();
 	~Graph();
 
+	std::list<Frame*> frames;
+	std::map<int, MapPoint*> mapPoints;
 private:
-	std::list<Frame*> Frames;
-	std::map<int, MapPoint*> MapPoints;
+
 
 };
 }
