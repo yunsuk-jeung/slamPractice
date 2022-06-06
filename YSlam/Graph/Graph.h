@@ -34,6 +34,8 @@ public:
 	~Graph();
 	void addFactor(Frame* frame, MapPoint* mapPoint);
 
+
+
 	//node
 	std::vector<Frame*> frames;
 	std::vector<MapPoint*> mapPoints;
@@ -41,8 +43,8 @@ public:
 	std::vector<Factor*> factors;
 
 	//factor
-	std::map<Frame, std::vector<Factor*>> kfFactors;
-	std::map<MapPoint*, std::vector<Factor*>> mpFactor;
+	//std::map<Frame, std::vector<Factor*>> kfFactors;
+	//std::map<MapPoint*, std::vector<Factor*>> mpFactor;
 
 private:
 

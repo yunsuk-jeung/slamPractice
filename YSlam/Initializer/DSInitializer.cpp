@@ -28,21 +28,23 @@ DSInitializer::~DSInitializer() {
 bool DSInitializer::process(Frame* frame) {
 
 	if (prev == nullptr) {
+
 		prev = frame;
 		extractor->process(frame);
 
 		int pyrlvl = frame->getPyramidLevel();
 
-		graph->frames.push_back(frame);
+		frames.push_back(frame);
 
 		for (int i = 0; i < pyrlvl; i++) {
 			std::vector<datastruct::Feature>& features = frame->features[i];
 
 			for (int j = 0; j < features.size(); j++) {
 
-				datastruct::MapPoint* mp = new datastruct::MapPoint();
-				//graph->mapPoints
+				MapPoint* mp = new MapPoint();
+				mp->setPosition(features[j].uv, pyrlvl);
 				
+				mapPoints.push_back(mp);
 
 			}
 		}
@@ -52,11 +54,15 @@ bool DSInitializer::process(Frame* frame) {
 
 	curr = frame;
 
+
+
+
+
+
+
+
+
 	bool suc= true;
-
-	
-
-
 
 	if (!suc){
 		delete prev;
@@ -64,6 +70,14 @@ bool DSInitializer::process(Frame* frame) {
 	}
 	
 	return suc;
+
+}
+
+void DSInitializer::makeNN() {
+	const float distFactor = 0.05;
+
+	//typedef nanoflan::
+
 
 }
 

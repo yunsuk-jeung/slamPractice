@@ -14,9 +14,11 @@ public:
 	virtual ~DSInitializer();
 	virtual bool process(Frame* frame);
 	
+	void makeNN();
 
 private:
 	DSInitializer();
+	std::vector< Frame* > frames;
 	std::vector< MapPoint* > mapPoints;
 
 };

@@ -8,6 +8,7 @@
 
 namespace dan {
 
+
 	class Frame {
 	public:
 
@@ -36,4 +37,5 @@ namespace dan {
 
 		bool isKeyFrame = false;
 	};
+
 }

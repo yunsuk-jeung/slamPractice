@@ -4,7 +4,9 @@
 #include <Eigen/Eigen>
 
 namespace dan {
-namespace datastruct {
+
+
+
 class Frame;
 class MapPoint {
 public:
@@ -12,16 +14,25 @@ public:
 	MapPoint() {}
 	~MapPoint() {}
 
+	// first
+	void setPosition(Eigen::Vector2f uv, int _lvl) {
+
+		Pcx.head<2>() = uv.cast<double>();
+		Pcx.z() = 1.0;
+		invDepth = 1.0;
+
+		lvl = _lvl;
+	}
+
 private: 
 
-	int lvl = 0;
+	int lvl = -1;
 
 	double invDepth;
-	Eigen::Vector3d point;
+	Eigen::Vector3d Pcx;
 
 	std::list<Frame* > frames;
 };
 
 
-}
 }
