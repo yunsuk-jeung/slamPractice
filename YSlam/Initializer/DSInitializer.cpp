@@ -54,15 +54,7 @@ bool DSInitializer::process(Frame* frame) {
 
 	curr = frame;
 
-
-
-
-
-
-
-
-
-	bool suc= true;
+	bool suc= initialize();
 
 	if (!suc){
 		delete prev;
@@ -72,6 +64,13 @@ bool DSInitializer::process(Frame* frame) {
 	return suc;
 
 }
+
+bool DSInitializer::initialize() {
+	
+
+	return false;
+}
+
 
 void DSInitializer::makeNN() {
 	const float distFactor = 0.05;

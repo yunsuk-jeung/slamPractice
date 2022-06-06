@@ -14,6 +14,8 @@ public:
 	virtual ~DSInitializer();
 	virtual bool process(Frame* frame);
 	
+	bool initialize();
+
 	void makeNN();
 
 private:
