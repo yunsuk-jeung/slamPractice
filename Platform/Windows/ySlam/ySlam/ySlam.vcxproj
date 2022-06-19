@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\YSlam\Camera\Camera.h" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Feature.h" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Frame.h" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Image.hpp" />
@@ -39,6 +40,7 @@
     <ClInclude Include="..\..\..\..\YSlam\Utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\YSlam\Camera\Camera.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\datastruct\Feature.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\datastruct\Frame.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
