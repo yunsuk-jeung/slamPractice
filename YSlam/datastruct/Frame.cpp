@@ -5,6 +5,10 @@ namespace dan {
 Frame::Frame() {}
 Frame::~Frame() {}
 
+void Frame::setCamere(Camera& _cam) {
+	cam = _cam;
+}
+
 void Frame::createImagePyramid(datastruct::ImagePtr imagePtr) {
 
 	imagePyramid.timestamp = imagePtr->timestamp;

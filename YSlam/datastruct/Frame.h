@@ -5,6 +5,7 @@
 #include "datastruct/Image.hpp"
 #include "datastruct/ImagePyramid.hpp"
 #include "Parameters/Parameters.h"
+#include "Camera/Camera.h"
 
 namespace dan {
 
@@ -14,6 +15,8 @@ namespace dan {
 
 		Frame();
 		~Frame();
+
+		void setCamere(Camera& _cam);
 
 		void createImagePyramid(datastruct::ImagePtr _imagePyramid);
 		void createGradientPyramid();
@@ -29,6 +32,7 @@ namespace dan {
 
 		std::vector<std::vector< datastruct::Feature >> features;
 	private:
+		Camera cam;
 		datastruct::ImagePyramid imagePyramid;
 		datastruct::ImagePyramid xGradientPyramid;
 		datastruct::ImagePyramid yGradientPyramid;

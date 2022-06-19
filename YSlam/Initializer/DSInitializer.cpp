@@ -54,7 +54,7 @@ bool DSInitializer::process(Frame* frame) {
 
 	curr = frame;
 
-	bool suc= initialize();
+	bool suc = initialize();
 
 	if (!suc){
 		delete prev;

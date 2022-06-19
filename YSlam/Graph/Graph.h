@@ -43,7 +43,7 @@ public:
 	std::vector<Factor*> factors;
 
 	//factor
-	//std::map<Frame, std::vector<Factor*>> kfFactors;
+	//std::map<Frame*, std::list<Factor*>> kfFactors;
 	//std::map<MapPoint*, std::vector<Factor*>> mpFactor;
 
 private:
