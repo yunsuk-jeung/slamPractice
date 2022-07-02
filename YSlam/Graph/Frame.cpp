@@ -1,5 +1,6 @@
-#include "datastruct/Frame.h"
+#include "Graph/Frame.h"
 #include "Parameters/Parameters.h"
+#include "datastruct/Pose.h"
 
 namespace dan {
 Frame::Frame() {}
@@ -125,6 +126,39 @@ datastruct::ImagePyramid* Frame::getYGradPyramid() {
 
 datastruct::ImagePyramid* Frame::getMagGradientPyramid() {
 	return &magGradientPyramid;
+}
+
+datastruct::Pose* Frame::getPwc() {
+	return &Pwc;
+}
+
+void Frame::getCeresParameter(double* pose) {
+	Eigen::Vector3d& position = Pwc.position;
+	Eigen::Quaterniond& rotation = Pwc.rotation;
+
+
+	pose[0] = position.x();
+	pose[1] = position.y();
+	pose[2] = position.z();
+
+	pose[3] = rotation.x();
+	pose[4] = rotation.y();
+	pose[5] = rotation.z();
+	pose[6] = rotation.w();
+}
+
+void Frame::setCeresParameter(double* pose) {
+	Eigen::Vector3d& position = Pwc.position;
+	Eigen::Quaterniond& rotation = Pwc.rotation;
+
+	position.x() = pose[0];
+	position.y() = pose[1];
+	position.z() = pose[2];
+
+	rotation.x() = pose[3];
+	rotation.y() = pose[4];
+	rotation.z() = pose[5];
+	rotation.w() = pose[6];
 }
 
 

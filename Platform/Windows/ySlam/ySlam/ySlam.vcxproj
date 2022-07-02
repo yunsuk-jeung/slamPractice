@@ -21,17 +21,19 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\YSlam\Camera\Camera.h" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Feature.h" />
-    <ClInclude Include="..\..\..\..\YSlam\datastruct\Frame.h" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Image.hpp" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\ImagePyramid.hpp" />
-    <ClInclude Include="..\..\..\..\YSlam\datastruct\MapPoint.h" />
+    <ClInclude Include="..\..\..\..\YSlam\datastruct\Pose.h" />
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Types.h" />
     <ClInclude Include="..\..\..\..\YSlam\Extractor\Extractor.h" />
     <ClInclude Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Graph\Frame.h" />
     <ClInclude Include="..\..\..\..\YSlam\Graph\Graph.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Graph\MapPoint.h" />
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h" />
     <ClInclude Include="..\..\..\..\YSlam\Initializer\DSInitializer.h" />
     <ClInclude Include="..\..\..\..\YSlam\Initializer\Initializer.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Optimizer\Optimizer.h" />
     <ClInclude Include="..\..\..\..\YSlam\Parameters\Parameters.h" />
     <ClInclude Include="..\..\..\..\YSlam\Tracker\DSTracker.h" />
     <ClInclude Include="..\..\..\..\YSlam\Tracker\Tracker.h" />
@@ -42,16 +44,15 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\YSlam\Camera\Camera.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\datastruct\Feature.cpp" />
-    <ClCompile Include="..\..\..\..\YSlam\datastruct\Frame.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\YSlam\datastruct\MapPoint.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Extractor\Extractor.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Graph\Frame.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Graph\Graph.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Graph\MapPoint.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Initializer\DSInitializer.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Initializer\Initializer.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Optimizer\Optimizer.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Parameters\Parameters.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Tracker\DSTracker.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Tracker\Tracker.cpp" />
@@ -63,33 +64,33 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{9F8AEC05-1116-49B4-82C0-D11F8315004C}</ProjectGuid>
     <RootNamespace>slamtutorial</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>ySlam</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -115,7 +116,10 @@
     <Import Project="flann_release.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Program Files (x86)\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Visual Leak Detector\lib\Win64\vld.lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

@@ -3,17 +3,20 @@
 #include "Extractor/GridPixelExtractor.h"
 
 #include "Tracker/DSTracker.h"
-#include "datastruct/Frame.h"
-#include "datastruct/MapPoint.h"
+
+#include "Graph/Frame.h"
+#include "Graph/MapPoint.h"
 
 #include "Graph/Graph.h"
 
 #include "Initializer/DSInitializer.h"
 #include "Parameters/Parameters.h"
 
+#include "Optimizer/Optimizer.h"
+
 namespace dan {
 DSInitializer::DSInitializer() {
-	
+
 	extractor = Extractor::createExtractor(TRACKER_TYPE);
 }
 
@@ -27,46 +30,51 @@ DSInitializer::~DSInitializer() {
 
 bool DSInitializer::process(Frame* frame) {
 
-	if (prev == nullptr) {
+	if (prevF == nullptr) {
 
-		prev = frame;
+		prevF = frame;
 		extractor->process(frame);
 
-		int pyrlvl = frame->getPyramidLevel();
-
-		frames.push_back(frame);
-
-		for (int i = 0; i < pyrlvl; i++) {
-			std::vector<datastruct::Feature>& features = frame->features[i];
-
-			for (int j = 0; j < features.size(); j++) {
-
-				MapPoint* mp = new MapPoint();
-				mp->setPosition(features[j].uv, pyrlvl);
-				
-				mapPoints.push_back(mp);
-
-			}
-		}
-		
 		return false;
 	}
 
-	curr = frame;
+	currF = frame;
 
 	bool suc = initialize();
 
-	if (!suc){
-		delete prev;
-		prev = curr;
-	}
-	
+	//if (!suc){
+	//	delete prevF;
+	//	prevF = currF;
+	//}
+
 	return suc;
 
 }
 
 bool DSInitializer::initialize() {
-	
+
+	int pyrlvl = prevF->getPyramidLevel();
+
+
+	if (mapPoints.empty()) {
+
+		for (int i = 0; i < pyrlvl; i++) {
+			std::vector<datastruct::Feature>& features = currF->features[i];
+
+			for (int j = 0; j < features.size(); j++) {
+
+				MapPoint* mp = new MapPoint();
+				mp->setPosition(features[j].uv, pyrlvl);
+
+				mapPoints.push_back(mp);
+
+			}
+		}
+
+	}
+
+	Optimizer::InitialBA(currF, mapPoints);
+
 
 	return false;
 }

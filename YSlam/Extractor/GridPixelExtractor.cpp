@@ -1,7 +1,7 @@
 #include <algorithm>
 
 #include "Extractor/GridPixelExtractor.h"
-#include "datastruct/Frame.h"
+#include "Graph/Frame.h"
 #include "Parameters/Parameters.h"
 
 #include "Utils/Timer.h"

@@ -40,15 +40,15 @@
     <Filter Include="ySLAM\Camera">
       <UniqueIdentifier>{c675bc31-42eb-470c-89a9-7cfe8e832549}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ySLAM\Optimizer">
+      <UniqueIdentifier>{dbbe969d-4734-497c-834d-c0145b8317bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h">
       <Filter>ySLAM\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Image.hpp">
-      <Filter>ySLAM\datastruct</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\YSlam\datastruct\Frame.h">
       <Filter>ySLAM\datastruct</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\YSlam\datastruct\ImagePyramid.hpp">
@@ -93,19 +93,25 @@
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Feature.h">
       <Filter>ySLAM\datastruct</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\YSlam\datastruct\MapPoint.h">
-      <Filter>ySLAM\datastruct</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\YSlam\Camera\Camera.h">
       <Filter>ySLAM\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Optimizer\Optimizer.h">
+      <Filter>ySLAM\Optimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Graph\Frame.h">
+      <Filter>ySLAM\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Graph\MapPoint.h">
+      <Filter>ySLAM\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\datastruct\Pose.h">
+      <Filter>ySLAM\datastruct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp">
       <Filter>ySLAM\include</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\YSlam\datastruct\Frame.cpp">
-      <Filter>ySLAM\datastruct</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\YSlam\Parameters\Parameters.cpp">
       <Filter>ySLAM\Parameters</Filter>
@@ -143,11 +149,17 @@
     <ClCompile Include="..\..\..\..\YSlam\Graph\Graph.cpp">
       <Filter>ySLAM\Graph</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\YSlam\datastruct\MapPoint.cpp">
-      <Filter>ySLAM\datastruct</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\YSlam\Camera\Camera.cpp">
       <Filter>ySLAM\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Optimizer\Optimizer.cpp">
+      <Filter>ySLAM\Optimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Graph\MapPoint.cpp">
+      <Filter>ySLAM\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Graph\Frame.cpp">
+      <Filter>ySLAM\Graph</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

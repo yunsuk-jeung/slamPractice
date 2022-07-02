@@ -1,12 +1,17 @@
+//#ifdef _DEBUG
+////#include <vld.h>
+//#include <vld.h>
+//#endif
+
 #include "include/YSlam.h"
 
-#include "datastruct/Frame.h"
 #include "datastruct/Image.hpp"
 
 #include "Extractor/Extractor.h"
 #include "Tracker/Tracker.h"
 
 #include "Graph/Graph.h"
+#include "Graph/Frame.h"
 
 #include "flann/config.h"
 #include "Camera/Camera.h"

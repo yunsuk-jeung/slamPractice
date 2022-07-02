@@ -11,7 +11,10 @@ class Frame;
 class MapPoint {
 public:
 
-	MapPoint() {}
+	MapPoint() {
+		invDepth = 1.0;
+		Pcx.setZero();
+	}
 	~MapPoint() {}
 
 	// first

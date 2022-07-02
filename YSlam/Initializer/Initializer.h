@@ -19,8 +19,8 @@ enum class TrackerType;
 
 	protected:
 		Initializer();
-		Frame* prev = nullptr;
-		Frame* curr = nullptr;
+		Frame* prevF = nullptr;
+		Frame* currF = nullptr;
 		Extractor* extractor = nullptr;
 		Graph* graph = nullptr;
 
