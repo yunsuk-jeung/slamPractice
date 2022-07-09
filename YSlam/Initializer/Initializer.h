@@ -1,8 +1,6 @@
 #pragma once 
 #include <iostream>
 
-namespace dan {
-
 enum class TrackerType;
 	class Frame;
 	class Extractor;
@@ -27,4 +25,3 @@ enum class TrackerType;
 	private:
 	};
 
-}

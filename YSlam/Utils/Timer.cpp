@@ -3,8 +3,6 @@
 #include "Timer.h"
 #include "Logger.h"
 
-namespace dan
-{
 
 	const int REPORT_PERIOD = 10;
 
@@ -81,4 +79,3 @@ namespace dan
 		printf("--------------------------------------------------------\n");
 	}
 
-}

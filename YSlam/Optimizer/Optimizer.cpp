@@ -4,8 +4,6 @@
 
 #include "ceres/ceres.h"
 
-namespace dan {
-
 
 
 void Optimizer::InitialBA(Frame* currF,std::vector<MapPoint*>& vMapPoints) {
@@ -15,10 +13,13 @@ void Optimizer::InitialBA(Frame* currF,std::vector<MapPoint*>& vMapPoints) {
 
 	currF->getCeresParameter(pose[0]);
 
+	ceres::Problem problem;
+	ceres::LocalParameterization* localParameterization;
+	//problem.AddParameterBlock(pose[0], 7, );
+
 	delete[] pose[0];
 	delete[] pose;
 }
 
 
 
-}

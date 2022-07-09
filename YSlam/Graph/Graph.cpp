@@ -1,7 +1,5 @@
 #include "Graph/Graph.h"
 
-namespace dan {
-
 Graph::Graph() {}
 Graph::~Graph() {
 
@@ -21,4 +19,3 @@ void Graph::addFactor(Frame* frame, MapPoint* mapPoint) {
 }
 
 
-}

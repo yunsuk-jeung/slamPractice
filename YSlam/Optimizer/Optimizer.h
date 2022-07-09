@@ -2,7 +2,6 @@
 
 #include <vector>
 
-namespace dan {
 
 class Frame;
 class MapPoint;
@@ -12,4 +11,3 @@ public:
 
 };
 
-}

@@ -2,7 +2,6 @@
 #include "Extractor/GridPixelExtractor.h"
 #include "Parameters/Parameters.h"
 
-namespace dan {
 	Extractor::Extractor() {}
 	Extractor::~Extractor() {}
 
@@ -32,4 +31,3 @@ namespace dan {
 
 
 
-}

@@ -17,8 +17,6 @@
 
 #endif
 
-namespace dan {
-
 	class FileReader {
 	public:
 		FileReader();
@@ -38,5 +36,5 @@ namespace dan {
 		int imgNum = 0;
 
 	};
-}
+
 

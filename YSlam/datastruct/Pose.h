@@ -2,7 +2,7 @@
 
 #include <Eigen/Eigen>
 
-namespace dan {
+
 namespace datastruct {
 
 class Pose {
@@ -77,4 +77,4 @@ public:
 };
 
 }
-}
+

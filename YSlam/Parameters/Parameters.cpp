@@ -1,7 +1,6 @@
 #include "Parameters/Parameters.h"
 #include "opencv2/opencv.hpp"
 
-namespace dan {
 
 	static Parameters* instance = nullptr;
 
@@ -107,4 +106,3 @@ namespace dan {
 	}
 
 
-}

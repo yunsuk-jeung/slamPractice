@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-namespace dan {
+
 	class Frame;
 	class Graph;
 	enum class TrackerType;
@@ -40,4 +40,3 @@ namespace dan {
 
 	};
 
-}

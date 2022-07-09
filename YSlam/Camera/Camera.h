@@ -4,9 +4,6 @@
 
 #include <Eigen/Eigen>
 
-namespace dan
-{
-
 class Camera
 {
 public:
@@ -78,5 +75,3 @@ public:
 	Eigen::Matrix3d eigenP;
 	double baseline;
 };
-
-}

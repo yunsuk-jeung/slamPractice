@@ -2,7 +2,6 @@
 
 #include <opencv2/opencv.hpp>
 
-namespace dan {
 namespace datastruct {
 
 class Image {
@@ -21,5 +20,4 @@ private:
 
 typedef std::shared_ptr<Image> ImagePtr;
 
-}
 }

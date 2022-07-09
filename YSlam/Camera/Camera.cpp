@@ -8,9 +8,6 @@
 
 using namespace std;
 
-namespace dan
-{
-
 Camera::Camera() {
 	int width = 0;
 	int height = 0;
@@ -402,6 +399,4 @@ bool Camera::loadFromFilePointer(FILE* file)
 	D.at<double>(4, 0) = 0.0;
 
 	return true;
-}
-
 }

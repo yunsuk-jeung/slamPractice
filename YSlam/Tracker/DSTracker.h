@@ -4,8 +4,6 @@
 #include "Tracker/Tracker.h"
 #include "datastruct/Image.hpp"
 
-namespace dan {
-
 	enum class ProcessState {
 		INITIALIZE,
 
@@ -24,4 +22,3 @@ namespace dan {
 		
 	};
 
-}

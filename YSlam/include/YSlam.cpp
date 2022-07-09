@@ -16,18 +16,16 @@
 #include "flann/config.h"
 #include "Camera/Camera.h"
 
-namespace dan {
-
-static YSlam* instance = nullptr;
+static Eslam* instance = nullptr;
 
 Tracker* tracker = nullptr;
 Extractor* extractor = nullptr;
 Graph* graph = nullptr;
 
-YSlam::YSlam() {
+Eslam::Eslam() {
 }
 
-YSlam::~YSlam() {
+Eslam::~Eslam() {
 	if (tracker != nullptr) {
 		delete tracker;
 		tracker = nullptr;
@@ -45,15 +43,15 @@ YSlam::~YSlam() {
 
 }
 
-YSlam* YSlam::getInstance() {
+Eslam* Eslam::getInstance() {
 	if (instance == nullptr) {
-		instance = new YSlam;
+		instance = new Eslam;
 	}
 
 	return instance;
 }
 
-void YSlam::deleteInstance() {
+void Eslam::deleteInstance() {
 	if (instance != nullptr) {
 		delete instance;
 		instance = nullptr;
@@ -62,7 +60,7 @@ void YSlam::deleteInstance() {
 	return;
 }
 
-bool YSlam::init(std::string dataPath, std::string parameterPath) {
+bool Eslam::init(std::string dataPath, std::string parameterPath) {
 
 	std::cout << "parameter Path : " << parameterPath << std::endl;
 	bool parameterSet = Parameters::getInstance()->setParameters(parameterPath);
@@ -80,7 +78,7 @@ bool YSlam::init(std::string dataPath, std::string parameterPath) {
 	return true;
 }
 
-void YSlam::setNewFrame(Byte* data, int length, int width, int height, datastruct::ColorFormat format, unsigned long long int timestmap) {
+void Eslam::setNewFrame(Byte* data, int length, int width, int height, datastruct::ColorFormat format, unsigned long long int timestmap) {
 
 	datastruct::ImagePtr image(new datastruct::Image());
 	image->cvImage = cv::Mat(height, width, CV_8UC1);
@@ -108,5 +106,4 @@ void YSlam::setNewFrame(Byte* data, int length, int width, int height, datastruc
 	//extractor->process(frame);
 	tracker->process(frame);
 
-}
 }

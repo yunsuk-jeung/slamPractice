@@ -1,7 +1,5 @@
 #pragma once
 
-namespace dan {
-
 namespace datastruct {
 
 	enum class ColorFormat
@@ -59,4 +57,4 @@ namespace datastruct {
 		LANDSCAPE_RIGHT = 4,
 	};
 }
-}
+

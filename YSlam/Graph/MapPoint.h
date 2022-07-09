@@ -3,9 +3,6 @@
 #include <iostream>
 #include <Eigen/Eigen>
 
-namespace dan {
-
-
 
 class Frame;
 class MapPoint {
@@ -38,4 +35,4 @@ private:
 };
 
 
-}
+

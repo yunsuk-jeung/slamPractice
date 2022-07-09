@@ -2,7 +2,6 @@
 #include <iostream>
 #include "Parameters/Parameters.h"
 
-namespace dan {
 
 class Frame;
 class Initializer;
@@ -27,4 +26,3 @@ protected:
 private:
 };
 
-}

@@ -7,7 +7,7 @@
 #include "Utils/Timer.h"
 
 
-namespace dan {
+
 GridPixelExtractor::GridPixelExtractor() {
 	std::cout << "Extractor : GridPixelExtractor" << std::endl;
 
@@ -597,4 +597,3 @@ void GridPixelExtractor::extract_scath(Frame* frame) {
 
 }
 
-}

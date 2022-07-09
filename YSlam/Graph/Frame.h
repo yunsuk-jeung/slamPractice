@@ -8,7 +8,7 @@
 #include "Parameters/Parameters.h"
 #include "Camera/Camera.h"
 
-namespace dan {
+
 
 	class datastruct::Pose;
 	class Frame {
@@ -49,4 +49,3 @@ namespace dan {
 		bool isKeyFrame = false;
 	};
 
-}

@@ -4,7 +4,7 @@
 #include <vector>
 #include "Extractor/Extractor.h"
 
-namespace dan {
+
 
 	class Frame;
 	class GridPixelExtractor : public Extractor {
@@ -36,4 +36,3 @@ namespace dan {
 		int yPixelSearchNum = 0;
 	};
 
-}

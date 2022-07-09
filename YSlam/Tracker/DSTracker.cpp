@@ -7,7 +7,7 @@
 
 #include "Parameters/Parameters.h"
 
-namespace dan {
+
 DSTracker::DSTracker() {
 	std::cout << "Tracker is DSTracker" << std::endl;
 	initializer = Initializer::createInitializer(TRACKER_TYPE);
@@ -31,4 +31,3 @@ void DSTracker::process(Frame* frame) {
 	
 }
 
-}

@@ -8,8 +8,6 @@
 
 #include <float.h>
 
-namespace dan
-{
 
 	class Timer
 	{
@@ -64,4 +62,3 @@ namespace dan
 		~Statistics() {};
 	};
 
-}

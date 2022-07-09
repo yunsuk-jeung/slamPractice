@@ -2,7 +2,6 @@
 #include "Parameters/Parameters.h"
 #include "datastruct/Pose.h"
 
-namespace dan {
 Frame::Frame() {}
 Frame::~Frame() {}
 
@@ -162,4 +161,3 @@ void Frame::setCeresParameter(double* pose) {
 }
 
 
-}

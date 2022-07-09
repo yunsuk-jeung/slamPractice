@@ -5,7 +5,7 @@
 #include "Initializer/Initializer.h"
 
 
-namespace dan {
+
 	Tracker::Tracker() {}
 	Tracker::~Tracker() {}
 
@@ -25,4 +25,3 @@ namespace dan {
 		return nullptr;
 	}
 
-}

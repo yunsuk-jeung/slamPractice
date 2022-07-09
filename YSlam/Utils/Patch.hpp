@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-namespace dan {
+
 	class Patch;
 
 	class Patch {
@@ -22,4 +22,3 @@ namespace dan {
 
 	};
 
-}

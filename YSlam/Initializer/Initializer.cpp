@@ -2,7 +2,7 @@
 #include "Initializer/DSInitializer.h"
 
 #include "Parameters/Parameters.h"
-namespace dan {
+
 	Initializer::Initializer() {}
 	Initializer::~Initializer() {}
 
@@ -19,4 +19,3 @@ namespace dan {
 		graph = _graph;
 	}
 
-}

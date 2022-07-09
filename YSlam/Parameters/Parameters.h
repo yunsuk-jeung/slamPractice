@@ -6,7 +6,7 @@
 
 typedef unsigned char Byte;
 
-namespace dan {
+
 
 enum class DataType {
 	EUROC = 0,
@@ -49,4 +49,3 @@ extern int Y_PIXEL_SEARCH_NUM;
 extern int SHOW_THRESHOLD_IMAGE;
 extern int SHOW_ORIGIN_FEATURE;
 extern int SHOW_PYRAMID_FEATRUE;
-}

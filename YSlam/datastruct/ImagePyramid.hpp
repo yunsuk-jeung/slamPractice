@@ -3,7 +3,7 @@
 #include <opencv2/opencv.hpp>
 
 
-namespace dan {
+
 namespace datastruct {
 
 class ImagePyramid {
@@ -25,5 +25,4 @@ private:
 
 typedef std::shared_ptr<ImagePyramid> ImagePyramidPtr;
 
-}
 }

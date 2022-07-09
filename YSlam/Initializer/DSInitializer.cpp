@@ -14,7 +14,6 @@
 
 #include "Optimizer/Optimizer.h"
 
-namespace dan {
 DSInitializer::DSInitializer() {
 
 	extractor = Extractor::createExtractor(TRACKER_TYPE);
@@ -88,4 +87,3 @@ void DSInitializer::makeNN() {
 
 }
 
-}

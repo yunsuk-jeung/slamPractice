@@ -13,7 +13,6 @@
 
 using namespace std;
 
-namespace dan {
 
 FileReader::FileReader() {
 	//    std::cout << "Creating File Reader" << std::endl;
@@ -70,5 +69,4 @@ bool FileReader::getImage(std::shared_ptr<datastruct::Image> image) {
 	imageInfos.pop();
 
 	return true;
-}
 }

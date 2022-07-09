@@ -15,10 +15,10 @@ std::string parameterPath = "../../../../parameters.yaml";
 
 void mainFunc() {
 
-	dan::FileReader fileReader;
+	FileReader fileReader;
 	fileReader.openDirectory(dataPath);
 
-	dan::datastruct::ImagePtr image(new dan::datastruct::Image());
+	datastruct::ImagePtr image(new datastruct::Image());
 
 	int interval = 0;
 
@@ -33,7 +33,7 @@ void mainFunc() {
 
 		cv::imshow("original", image->cvImage);
 
-		dan::YSlam::getInstance()->setNewFrame(image->cvImage.data, image->length, image->width, image->height, dan::datastruct::ColorFormat::GRAY8, image->timestamp);
+		Eslam::getInstance()->setNewFrame(image->cvImage.data, image->length, image->width, image->height, datastruct::ColorFormat::GRAY8, image->timestamp);
 
 		int key = cv::waitKey();
 
@@ -42,15 +42,15 @@ void mainFunc() {
 		}
 	}
 
-	dan::YSlam::getInstance()->deleteInstance();
+	Eslam::getInstance()->deleteInstance();
 }
 
 
 int main() {
 
 
-	if (dan::YSlam::getInstance()->init(dataPath, parameterPath)) {
-		std::cout << "YSlam init success" << std::endl;
+	if (Eslam::getInstance()->init(dataPath, parameterPath)) {
+		std::cout << "Eslam init success" << std::endl;
 	}
 
 	std::thread mainThread;

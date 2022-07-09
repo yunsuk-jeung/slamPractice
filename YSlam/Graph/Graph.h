@@ -6,7 +6,7 @@
 #include <map>
 #include "Parameters/Parameters.h"
 
-namespace dan {
+
 class Frame;
 class MapPoint;
 class Factor {
@@ -50,4 +50,3 @@ private:
 
 
 };
-}

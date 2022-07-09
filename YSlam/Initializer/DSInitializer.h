@@ -5,7 +5,7 @@
 #include "Initializer/DSInitializer.h"
 #include "datastruct/Image.hpp"
 
-namespace dan {
+
 class MapPoint;
 class DSInitializer : public Initializer {
 public:
@@ -25,4 +25,3 @@ private:
 
 };
 
-}

@@ -3,7 +3,6 @@
 #include <iostream>
 #include <Eigen/Eigen>
 
-namespace dan {
 namespace datastruct {
 
 class Feature {
@@ -38,5 +37,4 @@ private:
 };
 
 
-}
 }
