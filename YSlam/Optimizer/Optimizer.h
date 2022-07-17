@@ -4,10 +4,10 @@
 
 
 class Frame;
-class MapPoint;
+class InvPoint;
 class Optimizer {
 public:
-	void static InitialBA(Frame* currF, std::vector<MapPoint*>& vMapPoints);
+	void static InitialBA(Frame* prev, Frame* currF, std::vector<InvPoint*>& vMapPoints);
 
 };
 

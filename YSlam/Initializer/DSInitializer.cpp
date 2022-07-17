@@ -5,7 +5,7 @@
 #include "Tracker/DSTracker.h"
 
 #include "Graph/Frame.h"
-#include "Graph/MapPoint.h"
+#include "Graph/InvPoint.h"
 
 #include "Graph/Graph.h"
 
@@ -54,6 +54,7 @@ bool DSInitializer::initialize() {
 
 	int pyrlvl = prevF->getPyramidLevel();
 
+	auto& mapPoints = graph->mapPoints;
 
 	if (mapPoints.empty()) {
 
@@ -62,9 +63,11 @@ bool DSInitializer::initialize() {
 
 			for (int j = 0; j < features.size(); j++) {
 
-				MapPoint* mp = new MapPoint();
-				mp->setPosition(features[j].uv, pyrlvl);
-
+				InvPoint* mp = new InvPoint();
+				Eigen::Vector2f d;
+				d << 0.5, 0.5;
+				mp->setPosition(features[j].uv + d, pyrlvl);
+				mp->id = mapPoints.size();
 				mapPoints.push_back(mp);
 
 			}
@@ -72,7 +75,7 @@ bool DSInitializer::initialize() {
 
 	}
 
-	Optimizer::InitialBA(currF, mapPoints);
+	Optimizer::InitialBA(prevF ,currF, mapPoints);
 
 
 	return false;

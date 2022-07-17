@@ -1,4 +1,6 @@
 #include "Graph/Graph.h"
+#include "Graph/Frame.h"
+#include "Graph/InvPoint.h"
 
 Graph::Graph() {}
 Graph::~Graph() {
@@ -12,10 +14,12 @@ Graph::~Graph() {
 
 }
 
-void Graph::addFactor(Frame* frame, MapPoint* mapPoint) {
-	frames.push_back(frame);
-	mapPoints.push_back(mapPoint);
+void Graph::addFactor(Frame* frame, InvPoint* mapPoint) {
+	//frames.push_back(frame);
+	//frame->id = frames.size();
 
+	//mapPoints.push_back(mapPoint);
+	//mapPoint->id = mapPoints.size();
 }
 
 

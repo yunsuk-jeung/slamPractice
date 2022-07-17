@@ -5,8 +5,12 @@
 Frame::Frame() {}
 Frame::~Frame() {}
 
-void Frame::setCamere(Camera& _cam) {
+void Frame::setCamera(Camera& _cam) {
 	cam = _cam;
+}
+
+Camera& Frame::getCamera() {
+	return cam;
 }
 
 void Frame::createImagePyramid(datastruct::ImagePtr imagePtr) {

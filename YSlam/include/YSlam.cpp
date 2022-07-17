@@ -16,16 +16,16 @@
 #include "flann/config.h"
 #include "Camera/Camera.h"
 
-static Eslam* instance = nullptr;
+static YSlam* instance = nullptr;
 
 Tracker* tracker = nullptr;
 Extractor* extractor = nullptr;
 Graph* graph = nullptr;
 
-Eslam::Eslam() {
+YSlam::YSlam() {
 }
 
-Eslam::~Eslam() {
+YSlam::~YSlam() {
 	if (tracker != nullptr) {
 		delete tracker;
 		tracker = nullptr;
@@ -43,15 +43,15 @@ Eslam::~Eslam() {
 
 }
 
-Eslam* Eslam::getInstance() {
+YSlam* YSlam::getInstance() {
 	if (instance == nullptr) {
-		instance = new Eslam;
+		instance = new YSlam;
 	}
 
 	return instance;
 }
 
-void Eslam::deleteInstance() {
+void YSlam::deleteInstance() {
 	if (instance != nullptr) {
 		delete instance;
 		instance = nullptr;
@@ -60,7 +60,7 @@ void Eslam::deleteInstance() {
 	return;
 }
 
-bool Eslam::init(std::string dataPath, std::string parameterPath) {
+bool YSlam::init(std::string dataPath, std::string parameterPath) {
 
 	std::cout << "parameter Path : " << parameterPath << std::endl;
 	bool parameterSet = Parameters::getInstance()->setParameters(parameterPath);
@@ -78,7 +78,7 @@ bool Eslam::init(std::string dataPath, std::string parameterPath) {
 	return true;
 }
 
-void Eslam::setNewFrame(Byte* data, int length, int width, int height, datastruct::ColorFormat format, unsigned long long int timestmap) {
+void YSlam::setNewFrame(Byte* data, int length, int width, int height, datastruct::ColorFormat format, unsigned long long int timestmap) {
 
 	datastruct::ImagePtr image(new datastruct::Image());
 	image->cvImage = cv::Mat(height, width, CV_8UC1);
@@ -98,7 +98,7 @@ void Eslam::setNewFrame(Byte* data, int length, int width, int height, datastruc
 	cam.setParameters(image->width, image->height, 4.616e+02, 4.603e+02, 3.630e+02, 2.481e+02, -2.917e-01, 8.228e-02, 5.333e-05, -1.578e-04	);
 	
 	Frame* frame = new Frame();
-	frame->setCamere(cam);
+	frame->setCamera(cam);
 	frame->createImagePyramid(image);
 	frame->createGradientPyramid();
 	frame->createMagGradientPyramid();

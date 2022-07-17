@@ -29,15 +29,22 @@
     <ClInclude Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.h" />
     <ClInclude Include="..\..\..\..\YSlam\Graph\Frame.h" />
     <ClInclude Include="..\..\..\..\YSlam\Graph\Graph.h" />
-    <ClInclude Include="..\..\..\..\YSlam\Graph\MapPoint.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Graph\InvPoint.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Graph\Point.h" />
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h" />
     <ClInclude Include="..\..\..\..\YSlam\Initializer\DSInitializer.h" />
     <ClInclude Include="..\..\..\..\YSlam\Initializer\Initializer.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Optimizer\Factor\Auto_Direct_InvDepth_Frame.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Optimizer\Factor\Direct_InvDepth_Frame.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\YSlam\Optimizer\Optimizer.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Optimizer\Parameterization\PoseLocalParameterization.h" />
     <ClInclude Include="..\..\..\..\YSlam\Parameters\Parameters.h" />
     <ClInclude Include="..\..\..\..\YSlam\Tracker\DSTracker.h" />
     <ClInclude Include="..\..\..\..\YSlam\Tracker\Tracker.h" />
     <ClInclude Include="..\..\..\..\YSlam\Utils\Logger.h" />
+    <ClInclude Include="..\..\..\..\YSlam\Utils\MathUtils.h" />
     <ClInclude Include="..\..\..\..\YSlam\Utils\Patch.hpp" />
     <ClInclude Include="..\..\..\..\YSlam\Utils\Timer.h" />
   </ItemGroup>
@@ -48,10 +55,13 @@
     <ClCompile Include="..\..\..\..\YSlam\Extractor\GridPixelExtractor.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Graph\Frame.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Graph\Graph.cpp" />
-    <ClCompile Include="..\..\..\..\YSlam\Graph\MapPoint.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\include\YSlam.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Initializer\DSInitializer.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Initializer\Initializer.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Optimizer\Factor\Auto_Direct_InvDepth_Frame.cpp" />
+    <ClCompile Include="..\..\..\..\YSlam\Optimizer\Factor\Direct_InvDepth_Frame.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\YSlam\Optimizer\Optimizer.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Parameters\Parameters.cpp" />
     <ClCompile Include="..\..\..\..\YSlam\Tracker\DSTracker.cpp" />

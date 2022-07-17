@@ -43,6 +43,12 @@
     <Filter Include="ySLAM\Optimizer">
       <UniqueIdentifier>{dbbe969d-4734-497c-834d-c0145b8317bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ySLAM\Optimizer\Parameterization">
+      <UniqueIdentifier>{8436552d-bf05-4f41-82c4-c47587f13b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ySLAM\Optimizer\Factor">
+      <UniqueIdentifier>{881a6fb8-74de-4a6f-9b4f-8b71881bbf2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\YSlam\include\YSlam.h">
@@ -102,11 +108,26 @@
     <ClInclude Include="..\..\..\..\YSlam\Graph\Frame.h">
       <Filter>ySLAM\Graph</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\YSlam\Graph\MapPoint.h">
-      <Filter>ySLAM\Graph</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\YSlam\datastruct\Pose.h">
       <Filter>ySLAM\datastruct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Optimizer\Parameterization\PoseLocalParameterization.h">
+      <Filter>ySLAM\Optimizer\Parameterization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Utils\MathUtils.h">
+      <Filter>ySLAM\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Optimizer\Factor\Auto_Direct_InvDepth_Frame.h">
+      <Filter>ySLAM\Optimizer\Factor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Optimizer\Factor\Direct_InvDepth_Frame.h">
+      <Filter>ySLAM\Optimizer\Factor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Graph\Point.h">
+      <Filter>ySLAM\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\YSlam\Graph\InvPoint.h">
+      <Filter>ySLAM\Graph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -155,11 +176,14 @@
     <ClCompile Include="..\..\..\..\YSlam\Optimizer\Optimizer.cpp">
       <Filter>ySLAM\Optimizer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\YSlam\Graph\MapPoint.cpp">
-      <Filter>ySLAM\Graph</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\YSlam\Graph\Frame.cpp">
       <Filter>ySLAM\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Optimizer\Factor\Direct_InvDepth_Frame.cpp">
+      <Filter>ySLAM\Optimizer\Factor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\YSlam\Optimizer\Factor\Auto_Direct_InvDepth_Frame.cpp">
+      <Filter>ySLAM\Optimizer\Factor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

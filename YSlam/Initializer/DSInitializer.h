@@ -6,7 +6,7 @@
 #include "datastruct/Image.hpp"
 
 
-class MapPoint;
+class InvPoint;
 class DSInitializer : public Initializer {
 public:
 
@@ -20,8 +20,8 @@ public:
 
 private:
 	DSInitializer();
-	std::vector< Frame* > frames;
-	std::vector< MapPoint* > mapPoints;
+	//std::vector< Frame* > frames;
+	//std::vector< InvPoint* > mapPoints;
 
 };
 

@@ -61,10 +61,11 @@ public:
 
 	Eigen::Matrix4d toSE3() {
 		Eigen::Matrix4d out;
-		out.setZero();
+		out.setIdentity();
 		out.block<3, 3>(0, 0) = rotation.toRotationMatrix();
 		out.block<3, 1>(0, 3) = position;
 	
+		return out;
 	}
 
 

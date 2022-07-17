@@ -8,7 +8,7 @@
 
 
 class Frame;
-class MapPoint;
+class InvPoint;
 class Factor {
 public:
 
@@ -16,7 +16,7 @@ public:
 	~Factor() {}
 
 	Frame* frame;
-	MapPoint* mapPoint;
+	InvPoint* mapPoint;
 
 private:
 
@@ -25,28 +25,31 @@ private:
 
 
 class Frame;
-class MapPoint;
+class InvPoint;
 class Graph {
 
 public:
 
 	Graph();
 	~Graph();
-	void addFactor(Frame* frame, MapPoint* mapPoint);
+	void addFactor(Frame* frame, InvPoint* mapPoint);
 
 
 
 	//node
 	std::vector<Frame*> frames;
-	std::vector<MapPoint*> mapPoints;
+	std::vector<InvPoint*> mapPoints;
 	
 	std::vector<Factor*> factors;
 
 	//factor
 	//std::map<Frame*, std::list<Factor*>> kfFactors;
-	//std::map<MapPoint*, std::vector<Factor*>> mpFactor;
+	//std::map<InvPoint*, std::vector<Factor*>> mpFactor;
 
 private:
+
+	int newMpId = 0;
+	int newFId = 0;
 
 
 };

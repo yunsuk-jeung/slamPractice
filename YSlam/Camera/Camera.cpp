@@ -192,6 +192,32 @@ void Camera::projection(const Eigen::Vector3d& input, Eigen::Vector2d& output) {
 	output << fx * p.x() + cx,
 		fy * p.y() + cy;
 }
+void Camera::constProjection(const Eigen::Vector3d& input, Eigen::Vector2d& output) const{
+
+	Eigen::Vector2d p(input.x() / input.z(), input.y() / input.z());
+
+	if (isDistortion == true) {
+		Eigen::Vector2d dp;
+
+		double mx2_u, my2_u, mxy_u, rho2_u, rad_dist_u;
+
+		mx2_u = p.x() * p.x();
+		my2_u = p.y() * p.y();
+		mxy_u = p.x() * p.y();
+
+		rho2_u = mx2_u + my2_u;
+
+		rad_dist_u = k1 * rho2_u + k2 * rho2_u * rho2_u;
+
+		dp << p.x() * rad_dist_u + 2.0 * p1 * mxy_u + p2 * (rho2_u + 2.0 * mx2_u),
+			p.y()* rad_dist_u + 2.0 * p2 * mxy_u + p1 * (rho2_u + 2.0 * my2_u);
+
+		p = p + dp;
+	}
+
+	output << fx * p.x() + cx,
+		fy* p.y() + cy;
+}
 
 void Camera::unprojection(const Eigen::Vector2d& input, Eigen::Vector3d& output) {
 	//double lambda;

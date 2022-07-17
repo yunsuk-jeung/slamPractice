@@ -33,7 +33,7 @@ void mainFunc() {
 
 		cv::imshow("original", image->cvImage);
 
-		Eslam::getInstance()->setNewFrame(image->cvImage.data, image->length, image->width, image->height, datastruct::ColorFormat::GRAY8, image->timestamp);
+		YSlam::getInstance()->setNewFrame(image->cvImage.data, image->length, image->width, image->height, datastruct::ColorFormat::GRAY8, image->timestamp);
 
 		int key = cv::waitKey();
 
@@ -42,15 +42,15 @@ void mainFunc() {
 		}
 	}
 
-	Eslam::getInstance()->deleteInstance();
+	YSlam::getInstance()->deleteInstance();
 }
 
 
 int main() {
 
 
-	if (Eslam::getInstance()->init(dataPath, parameterPath)) {
-		std::cout << "Eslam init success" << std::endl;
+	if (YSlam::getInstance()->init(dataPath, parameterPath)) {
+		std::cout << "YSlam init success" << std::endl;
 	}
 
 	std::thread mainThread;

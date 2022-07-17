@@ -6,23 +6,23 @@
 #include "Parameters/Parameters.h"
 
 #if defined _WIN32
-#define ESLAM_API __declspec(dllexport)
+#define YSLAM_API __declspec(dllexport)
 #else
-#define ESLAM_API
+#define YSLAM_API
 #endif
 
 
 
 
 	enum class ColorFormat;
-	class ESLAM_API Eslam {
+	class YSLAM_API YSlam {
 
 	public:
 
-		Eslam();
-		~Eslam();
+		YSlam();
+		~YSlam();
 
-		static Eslam* getInstance();
+		static YSlam* getInstance();
 		static void deleteInstance();
 
 		bool init(std::string dataPath, std::string parameterPath);

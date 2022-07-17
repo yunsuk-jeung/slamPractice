@@ -17,7 +17,8 @@
 		Frame();
 		~Frame();
 
-		void setCamere(Camera& _cam);
+		void setCamera(Camera& _cam);
+		Camera& getCamera();
 
 		void createImagePyramid(datastruct::ImagePtr _imagePyramid);
 		void createGradientPyramid();
@@ -36,6 +37,8 @@
 		datastruct::ImagePyramid* getMagGradientPyramid();
 
 		std::vector<std::vector< datastruct::Feature >> features;
+
+		int id = -1;
 	private:
 		Camera cam;
 		datastruct::ImagePyramid imagePyramid;

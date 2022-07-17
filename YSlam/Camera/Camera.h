@@ -26,7 +26,7 @@ public:
 	void setStereoParameters(cv::Mat R, cv::Mat P);
 
 	void projection(const Eigen::Vector3d &input, Eigen::Vector2d &output);
-
+	void constProjection(const Eigen::Vector3d& input, Eigen::Vector2d& output) const;
 	//equal to undistortion
 	void unprojection(const Eigen::Vector2d &input, Eigen::Vector3d &output);
 
