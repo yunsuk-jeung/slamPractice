@@ -6,20 +6,19 @@
 
 class Frame;
 
-template<typename T>
-class InvPoint_ : Point_<T> {
+class InvPoint : Point {
 public:
 
-	InvPoint_() {
+	InvPoint() {
 		invDepth = 1.0;
 		Pwx.setZero();
 	}
-	~InvPoint_() {}
+	~InvPoint() {}
 
 	// first
-	void setPosition(Eigen::Vector2f uv, int _lvl) {
+	void setPosition(Eigen::Matrix<float,2,1> uv, int _lvl) {
 
-		Pwx.head<2>() = uv.cast<T>();
+		Pwx.head<2>() = uv;
 		Pwx.z() = 1.0;
 		invDepth = 1.0;
 
@@ -35,7 +34,7 @@ public:
 	}
 
 
-	Eigen::Matrix<T,3,1> Pwx;
+	Eigen::Vector3f Pwx;
 
 	int id = -1;
 
@@ -43,12 +42,9 @@ private:
 
 	int lvl = -1;
 
-	T invDepth;
+	float invDepth;
 
 	std::list<Frame* > frames;
 	
 };
-
-typedef InvPoint_<double> InvPoint;
-typedef InvPoint_<float> InvPointf;
 

@@ -6,16 +6,15 @@
 
 class Frame;
 
-template<typename T>
-class Point_ {
+class Point {
 public:
 
-	Point_() {
+	Point() {
 		//invDepth = (T)1.0;
 		//Pwx.setZero();
 	}
 
-	virtual ~Point_() {}
+	virtual ~Point() {}
 
 	//// first
 	//void setPosition(Eigen::Vector2f uv, int _lvl) {
@@ -39,17 +38,14 @@ public:
 
 	//int id = -1;
 	//Eigen::Matrix<T,3,1> Pwx;
-
+	//Eigen::Matrix3d Pwx;
 protected: 
 
 	//int lvl = -1;
 
 	//T invDepth;
 
-	//std::list<Frame* > frames;
+	std::vector<Frame* > frames;
 	
 };
-
-typedef Point_<double> Point;
-typedef Point_<float> Pointf;
 

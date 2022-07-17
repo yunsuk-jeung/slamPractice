@@ -6,7 +6,7 @@
 #include "datastruct/Image.hpp"
 
 
-class InvPoint;
+class InvPoint_;
 class DSInitializer : public Initializer {
 public:
 
